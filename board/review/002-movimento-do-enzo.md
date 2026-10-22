@@ -1,7 +1,7 @@
 ---
 id: 002
 titulo: Enzo se move livremente
-coluna: dev
+coluna: review
 resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 0
 fase: 1
@@ -68,6 +68,10 @@ Fora do escopo: colisao com cenario, aceleracao/inercia, esquiva, Pe leve, camer
 Playtest: `sim` (seção 15). O Guilherme deve avaliar se 5 tiles/s e a diagonal parecem corretos.
 
 ## Notas do dev
+- Feito: dados em `src/data/player.ts` e `world.ts` (RENDER.tilePx aponta para WORLD.tilePx; SIM.playerSpeedPxPerSecond removido); `moveVector` em `src/sim/movement.ts` normaliza a diagonal; `step` usa 5 tiles/s x 64 px; WASD apenas (setas removidas); placeholder do Enzo em `src/render/playerView.ts` (capsula mataEscura, contorno folhagem, bone fogo); `tests/movement.test.ts` novo e `step.test.ts` atualizado.
+- Decisao: medidas do placeholder ficam em `src/data/render.ts`.
+- Fora: nada pendente. Playtest visual fica com o Guilherme.
+- `npm run test`: 25 testes passando. `npm run build`: ok (so aviso de tamanho de chunk).
 
 ## Comentarios
 - 2026-10-22 | PO | Fora do escopo deste card (não há regra na bíblia): colisão com cenário, inércia/aceleração, esquiva, Pé leve. A bíblia (seção 15) diz que cards de movimento passam por playtest do Guilherme, mas o card está com `playtest: nao`; o arquiteto deve rever esse campo.
@@ -82,3 +86,4 @@ Playtest: `sim` (seção 15). O Guilherme deve avaliar se 5 tiles/s e a diagonal
 - 2026-10-22 14:32 | SM | arquiteto deixou bloqueado (depende de cards ainda não mergeados); aguarda Guilherme/dependências
 - 2026-10-22 14:49 | SM | desbloqueado (autorização do Guilherme): dependências 000 e 001 estão no main; resultado -> pendente para o arquiteto revalidar o plano
 - 2026-10-22 14:49 | SM | refinamento -> dev (arquiteto aprovou); worktree .worktrees/002 criado
+- 2026-10-22 14:50 | SM | dev -> review (dev aprovou)
