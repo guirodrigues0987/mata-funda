@@ -1,7 +1,7 @@
 ---
 id: 001
 titulo: Loop de simulação com passo fixo
-coluna: qa
+coluna: done
 resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 0
 fase: 1
@@ -68,6 +68,18 @@ Base atual no main: `src/data/sim.ts` ja tem `SIM.ticksPerSecond = 60`; `src/sim
 - 2026-10-22 | Arquiteto | Bloqueado: depende do card 000 (Esqueleto do projeto), que ainda não está no main. Não existem `package.json`, `src/`, `tests/`, Vitest nem TypeScript. Este card precisa de `src/sim`, `src/data` e `tests` e do runner de testes criados pelo 000. Quando o 000 estiver no main, o card volta a ser refinado. Estimativa prévia: P (loop acumulador de tempo em `src/sim`, função `step` pura, taxa em `src/data`, 2 testes), playtest: nao.
 - 2026-10-22 | Arquiteto | Plano pronto. Estimativa P, playtest nao, executor claude. Dependencia 000 ja esta no main. Atencao ao arredondamento do acumulador (100 ms = 6 ticks exatos).
 - 2026-10-22 | Revisor | Passou no checklist: escopo, separacao sim/render, dados em src/data, determinismo, testes (14 passando, build ok). (opcional) src/render/GameScene.ts:26 tem o tamanho 32 do marcador fixo no codigo; mover para src/data/render.ts no card de visual. (opcional) GameScene.ts importa hexToNumber de um segundo `import ... from "../sim"`; pode unir com os outros.
+- 2026-10-22 | QA | resultado: aprovado. npm install ok, `npm run test -- --run` 4 arquivos / 14 testes passando, `npm run build` ok (so aviso de chunk grande do Phaser).
+
+| Critério | Evidência | Status |
+|---|---|---|
+| 60 ticks/s independente do frame (100 ms = 6, 16,7 ms = 1) | tests/clock.test.ts > "100 ms geram 6 ticks", "1000/60 ms gera 1 tick", "60 quadros de 1000/60 ms somam 60 ticks", "16 quadros de 10 ms..." | ok |
+| Função pura step(estado, comando), sem mutar nem relógio/random | tests/step.test.ts > "nao muta o estado recebido" e "src/sim nao tem 60 literal nem relogio/aleatoriedade"; src/sim/step.ts lido | ok |
+| Render só lê e desenha | src/render/GameScene.ts lido: só advanceClock/step/readCommand e setPosition; tests/architecture.test.ts > "src/sim nao importa phaser nem render" | ok |
+| Mesmos comandos duas vezes = estado idêntico | tests/step.test.ts > "e deterministico" | ok |
+| Roda sem navegador; 60 ticks = 1 s | tests/step.test.ts > "60 ticks equivalem a 1 segundo" (ambiente node, sem phaser) | ok |
+| Balanceamento em src/data | src/data/sim.ts (ticksPerSecond, maxTicksPerFrame, playerSpeedPxPerSecond); step.ts e clock.ts usam SIM | ok |
+
+Nenhum teste extra foi necessario (cobertura existente prova todos os criterios). playtest: nao.
 
 ## Historico
 - 2026-10-21 12:00 | SM | criado no backlog (Sprint 0)
@@ -77,3 +89,4 @@ Base atual no main: `src/data/sim.ts` ja tem `SIM.ticksPerSecond = 60`; `src/sim
 - 2026-10-22 14:46 | SM | refinamento -> dev (arquiteto aprovou); worktree .worktrees/001 criado
 - 2026-10-22 14:47 | SM | dev -> review (dev aprovou)
 - 2026-10-22 14:48 | SM | review -> qa (revisor aprovou)
+- 2026-10-22 14:48 | SM | qa -> done (qa aprovou; playtest: nao)
