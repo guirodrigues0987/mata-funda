@@ -2,7 +2,7 @@
 id: 002
 titulo: Enzo se move livremente
 coluna: done
-resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
+resultado: concluido      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 0
 fase: 1
 tipo: feature
@@ -111,3 +111,4 @@ Roteiro de playtest para o Guilherme:
 - 2026-10-22 14:50 | SM | review -> qa (revisor aprovou)
 - 2026-10-22 14:52 | SM | qa -> playtest (qa aprovou; revisor reconfirmou a revisão, registrada no card); aguarda Guilherme
 - 2026-10-22 15:38 | SM | playtest -> done: Guilherme aprovou o playtest por mensagem no chat (a aprovação foi dele, o SM só registrou); resultado -> pendente para o redator
+- 2026-10-22 15:39 | SM | redator aprovou; merge de card/002 no main; worktree e branch removidos; concluido

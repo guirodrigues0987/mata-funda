@@ -24,3 +24,10 @@ Quem fez: PO → Arquiteto (bloqueou uma vez, depois aprovou) → Dev (Claude) �
 Retrabalhos: 0
 O que mudou no jogo: a simulação agora roda em passo fixo de 60 atualizações por segundo, separada do desenho na tela, e um quadrado de teste se move com as setas ou WASD.
 Curiosidade: o Arquiteto avisou do perigo de arredondamento no relógio: 100 ms precisam dar exatamente 6 ticks. O Dev resolveu com uma tolerância minúscula, e 60 quadros de 1000/60 ms fecham em 60 ticks certinhos. Um teto de 10 ticks por quadro evita que o jogo trave ao voltar de uma aba em segundo plano.
+
+
+### 2026-10-22 — Card 002: Enzo se move livremente
+Quem fez: PO → Arquiteto (bloqueou uma vez, depois aprovou) → Dev (Claude) → Revisor → QA → Playtest (Guilherme)
+Retrabalhos: 0
+O que mudou no jogo: o Enzo ganhou corpo de cápsula escura com boné laranja e anda em 8 direções com WASD a 5 tiles por segundo, sem ficar mais rápido na diagonal.
+Curiosidade: o PO tinha marcado o card sem playtest, mas o Arquiteto lembrou que a bíblia manda playtest para todo card de movimento. A velocidade provisória do card 001 (240 px/s) deu lugar aos 320 px/s definitivos, agora lidos de arquivos de dados, e a diagonal foi corrigida com um teste que confere 320 px de distância em vez de ~452.
