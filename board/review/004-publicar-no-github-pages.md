@@ -1,7 +1,7 @@
 ---
 id: 004
 titulo: Publicar o jogo no GitHub Pages
-coluna: dev
+coluna: review
 resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 0
 fase: 1
@@ -56,6 +56,10 @@ Pré-requisitos humanos (Guilherme, fora do código): em Settings > Pages do rep
 Fora do escopo: mudar `vite.config.ts`, domínio customizado, preview por PR/branch, cache de build elaborado, lint, matriz de versões do Node, badges, qualquer mudança em `src/`.
 
 ## Notas do dev
+- Criado `.github/workflows/deploy.yml` (jobs test -> build -> deploy, passos "Testes", "Build", "Publicação", Node 22, gatilho push no main + workflow_dispatch). YAML validado com PyYAML. README ganhou a URL pública e a nota do fluxo.
+- Decisão: usei versões v4/v5/v3/v4 das actions oficiais (checkout/setup-node, configure-pages, upload-pages-artifact, deploy-pages).
+- Verificação: `dist/index.html` referencia `./assets/index-*.js` (caminho relativo, funciona em /mata-funda/). Não consegui rodar `vite preview` com servidor (comando negado pelo sandbox), então a checagem de 404 no console foi só por inspeção do dist. Conferir a execução no GitHub e a URL após o primeiro push (pré-requisitos do Guilherme: Pages Source = GitHub Actions e escopo `workflow`).
+- `npm run test -- --run`: 2 arquivos, 4 testes passando. `npm run build`: ok (só aviso de chunk > 500 kB do Phaser).
 
 ## Comentarios
 - 2026-10-22 | PO | Depende do card 000 (esqueleto com testes e build). Sem texto de jogo neste card.
@@ -68,3 +72,4 @@ Fora do escopo: mudar `vite.config.ts`, domínio customizado, preview por PR/bra
 - 2026-10-22 14:32 | SM | arquiteto deixou bloqueado (depende de cards ainda não mergeados); aguarda Guilherme/dependências
 - 2026-10-22 14:45 | SM | desbloqueado com autorização do Guilherme: dependência 000 já está no main; resultado -> pendente
 - 2026-10-22 14:46 | SM | refinamento -> dev (arquiteto aprovou); worktree .worktrees/004 criado
+- 2026-10-22 14:47 | SM | dev -> review (dev aprovou)
