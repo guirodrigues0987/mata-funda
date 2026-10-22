@@ -1,7 +1,7 @@
 ---
 id: 005
 titulo: Câmera que segue o Enzo e mapa com colisão
-coluna: dev
+coluna: review
 resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 0
 fase: 2
@@ -60,6 +60,10 @@ Estado atual do main: o Enzo vive em coordenadas relativas ao centro da tela (st
 **Fora do escopo:** geracao procedural, memoria do mapa (card 010), inimigos, esquiva, paralaxe e neblina, suavizacao ou limites da camera, colisao entre entidades, sprites finais, novas tecnicas de iluminacao alem do que o card 003 ja faz.
 
 ## Notas do dev
+- Feito: mapa fixo 40x24 em src/data/testMap.ts (corredor de 2 tiles, sala, 7 obstaculos soltos); colisao pura em src/sim/collision.ts (eixos separados, desliza na parede); createInitialState/step/run recebem mapa opcional (padrao TEST_MAP), spawn no centro do tile; camera com centerOn a cada draw (sem bounds); luz em coordenadas de mundo; src/render/mapView.ts (uma Image Light2D por tile, parede Noite com contorno Folhagem, chao Mata escura). Removidos testScene.ts e testSceneView.ts.
+- Decisoes: epsilon de colisao (collisionEpsilonPx) em src/data/sim.ts; caixa de colisao 0,25 tile de meia-largura/altura em PLAYER; tests/freeMap.ts como mapa livre para testes de movimento e luz; teste de luz usa tiles bloqueados do TEST_MAP.
+- Nao verificado no navegador (sem acesso); so testes e build.
+- npm run test: 52 passando (7 arquivos). npm run build: ok (so aviso de tamanho de chunk).
 
 ## Comentarios
 - 2026-10-22 | PO | Fora do escopo (a bíblia não define ou é de outro card): geração procedural, memória do mapa (card 010), inimigos, esquiva. Deslizar ao longo da parede ao andar na diagonal não está especificado na bíblia; o critério só exige que Enzo nunca entre em tile bloqueado, e o arquiteto pode escolher o comportamento mais simples.
@@ -73,3 +77,4 @@ Estado atual do main: o Enzo vive em coordenadas relativas ao centro da tela (st
 - 2026-10-22 15:59 | SM | PO aprovou; card fica no backlog: fase 2 > fase atual 1 (aguarda Guilherme atualizar docs/fases-do-projeto.md)
 - 2026-10-22 16:51 | SM | backlog -> refinamento (PO aprovou; Fase atual agora é 2)
 - 2026-10-22 16:52 | SM | refinamento -> dev (arquiteto aprovou; playtest: sim); worktree .worktrees/005 criado. 006, 007 e 008 esperam para não conflitarem em step.ts
+- 2026-10-22 16:54 | SM | dev -> review (dev aprovou)
