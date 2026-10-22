@@ -1,8 +1,9 @@
 import { describe, it, expect } from "vitest";
-import { createInitialState, run, isLit, lightRadiusPx } from "../src/sim";
+import { createInitialState, run, isLit, lightRadiusPx, isTileBlocked } from "../src/sim";
 import type { Command } from "../src/sim";
-import { PLAYER } from "../src/data/player";
-import { TEST_SCENE } from "../src/data/testScene";
+import { TEST_MAP } from "../src/data/testMap";
+import { WORLD } from "../src/data/world";
+import { FREE_MAP } from "./freeMap";
 
 const O = { x: 0, y: 0 };
 const R = 256;
@@ -24,17 +25,25 @@ describe("luz", () => {
   });
   it("acompanha o Enzo andando", () => {
     const cmd: Command = { moveX: 1, moveY: 0 };
-    const s = run(createInitialState(), Array.from({ length: 60 }, () => cmd));
-    expect(isLit(O, sq(450, 0), R)).toBe(false);
-    expect(isLit(s.player, sq(450, 0), R)).toBe(true);
-    expect(isLit(O, sq(-200, 0), R)).toBe(true);
-    expect(isLit(s.player, sq(-200, 0), R)).toBe(false);
+    const s = run(createInitialState(FREE_MAP), Array.from({ length: 60 }, () => cmd), FREE_MAP);
+    const o = createInitialState(FREE_MAP).player;
+    const at = (dx: number) => sq(o.x + dx, o.y);
+    expect(isLit(o, at(450), R)).toBe(false);
+    expect(isLit(s.player, at(450), R)).toBe(true);
+    expect(isLit(o, at(-200), R)).toBe(true);
+    expect(isLit(s.player, at(-200), R)).toBe(false);
   });
-  it("cenario de teste", () => {
-    const o = { x: PLAYER.startX, y: PLAYER.startY };
-    const lit = TEST_SCENE.shapes.filter((s) => isLit(o, s, R));
-    expect(TEST_SCENE.shapes.length).toBeGreaterThanOrEqual(5);
+  it("cenario de teste (tiles bloqueados do mapa)", () => {
+    const t = WORLD.tilePx;
+    const shapes: { x: number; y: number; width: number; height: number }[] = [];
+    TEST_MAP.rows.forEach((line, r) => {
+      for (let c = 0; c < line.length; c++) {
+        if (isTileBlocked(TEST_MAP, c, r)) shapes.push({ x: (c + 0.5) * t, y: (r + 0.5) * t, width: t, height: t });
+      }
+    });
+    const o = createInitialState().player;
+    const lit = shapes.filter((s) => isLit(o, s, R));
     expect(lit.length).toBeGreaterThanOrEqual(1);
-    expect(TEST_SCENE.shapes.length - lit.length).toBeGreaterThanOrEqual(3);
+    expect(shapes.length - lit.length).toBeGreaterThanOrEqual(3);
   });
 });

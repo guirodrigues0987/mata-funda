@@ -4,6 +4,7 @@ import { join } from "node:path";
 import { createInitialState, run, step } from "../src/sim";
 import type { Command, GameState } from "../src/sim";
 import { SIM } from "../src/data/sim";
+import { FREE_MAP } from "./freeMap";
 import { PLAYER } from "../src/data/player";
 import { WORLD } from "../src/data/world";
 
@@ -25,11 +26,11 @@ describe("step", () => {
   });
   it("e deterministico", () => {
     const cmds = Array.from({ length: 30 }, () => right);
-    const a = run(createInitialState(), cmds);
-    const b = run(createInitialState(), cmds);
+    const a = run(createInitialState(FREE_MAP), cmds, FREE_MAP);
+    const b = run(createInitialState(FREE_MAP), cmds, FREE_MAP);
     expect(a).toEqual(b);
     expect(a.tick).toBe(30);
-    expect(a.player.x).toBeCloseTo((30 * PLAYER.speedTilesPerSecond * WORLD.tilePx) / SIM.ticksPerSecond, 9);
+    expect(a.player.x - createInitialState(FREE_MAP).player.x).toBeCloseTo((30 * PLAYER.speedTilesPerSecond * WORLD.tilePx) / SIM.ticksPerSecond, 9);
   });
   it("60 ticks equivalem a 1 segundo", () => {
     const s = run(createInitialState(), Array.from({ length: 60 }, () => none));

@@ -1,11 +1,10 @@
 import Phaser from "phaser";
 import { PALETTE } from "../data/palette";
-import { RENDER } from "../data/render";
 import { advanceClock, createClock, createInitialState, step } from "../sim";
 import type { Clock, GameState } from "../sim";
 import { createLightRig, updateLight } from "./lightView";
 import { createEnzoView } from "./playerView";
-import { createTestScene } from "./testSceneView";
+import { createMapView } from "./mapView";
 import { readCommand } from "./readCommand";
 
 export class GameScene extends Phaser.Scene {
@@ -24,7 +23,7 @@ export class GameScene extends Phaser.Scene {
     const kb = this.input.keyboard!;
     this.wasd = kb.addKeys("W,A,S,D") as typeof this.wasd;
     this.light = createLightRig(this);
-    createTestScene(this);
+    createMapView(this);
     this.marker = createEnzoView(this);
     this.draw();
   }
@@ -49,9 +48,7 @@ export class GameScene extends Phaser.Scene {
 
   private draw(): void {
     updateLight(this.light, this.state.player);
-    this.marker.setPosition(
-      RENDER.baseWidth / 2 + this.state.player.x,
-      RENDER.baseHeight / 2 + this.state.player.y,
-    );
+    this.marker.setPosition(this.state.player.x, this.state.player.y);
+    this.cameras.main.centerOn(this.state.player.x, this.state.player.y);
   }
 }
