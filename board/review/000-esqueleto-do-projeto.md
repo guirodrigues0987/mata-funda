@@ -1,7 +1,7 @@
 ---
 id: 000
 titulo: Esqueleto do projeto
-coluna: dev
+coluna: review
 resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 1
 fase: 1
@@ -66,6 +66,7 @@ Loop de passo fixo, Enzo, movimento, mapa, luzes dinamicas, nevoa, paralaxe, SVG
 - Decisoes: dados em `.ts` (formato unico em src/data). Adicionei `@types/node` (devDependency) e `skipLibCheck`/`types: node` no tsconfig para os testes usarem `fs` sob `tsc --noEmit`. vite.config importa de `vitest/config`.
 - Fora: nada. Build avisa de chunk > 500kB (Phaser), esperado.
 - `npm run test -- --run`: 2 arquivos, 4 testes passando. `npm run build`: sem erros.
+- Retrabalho 1: `phaser` trocado de ^4.2.1 para ^3.90.0 (lock atualizado). Nenhum ajuste de codigo necessario. Test: 2 arquivos, 4 testes passando; build sem erros.
 
 ## Comentarios
 - 2026-10-22 | Arquiteto | Plano pronto, estimativa P, playtest nao. Fora do codigo porque nao ha nada no main ainda (sem src/ nem package.json). Phaser e Vite sao exigidos pela bíblia/card; Vitest idem.
@@ -78,3 +79,4 @@ Loop de passo fixo, Enzo, movimento, mapa, luzes dinamicas, nevoa, paralaxe, SVG
 - 2026-10-22 14:32 | SM | refinamento -> dev (arquiteto aprovou); worktree .worktrees/000 criado
 - 2026-10-22 14:37 | SM | dev -> review (dev aprovou)
 - 2026-10-22 14:40 | SM | review -> dev (revisor reprovou: Phaser 4 em vez de 3.x); retrabalho 1
+- 2026-10-22 14:42 | SM | dev -> review (dev aprovou retrabalho 1)
