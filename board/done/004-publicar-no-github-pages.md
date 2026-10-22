@@ -2,7 +2,7 @@
 id: 004
 titulo: Publicar o jogo no GitHub Pages
 coluna: done
-resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
+resultado: concluido      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 0
 fase: 1
 tipo: tecnico
@@ -88,3 +88,4 @@ Pendências do Guilherme: (1) Settings > Pages > Source = GitHub Actions; (2) cr
 - 2026-10-22 14:47 | SM | dev -> review (dev aprovou)
 - 2026-10-22 14:47 | SM | review -> qa (revisor aprovou)
 - 2026-10-22 14:48 | SM | qa -> done (qa aprovado, com pendências humanas de Pages/workflow; playtest: nao)
+- 2026-10-22 14:48 | SM | redator aprovou; merge de card/004 no main; worktree e branch removidos; concluido
