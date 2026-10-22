@@ -1,7 +1,7 @@
 ---
 id: 001
 titulo: Loop de simulação com passo fixo
-coluna: dev
+coluna: review
 resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 0
 fase: 1
@@ -57,6 +57,10 @@ Base atual no main: `src/data/sim.ts` ja tem `SIM.ticksPerSecond = 60`; `src/sim
 **Fora do escopo**: colisao, mapa, inimigos, combate, dash, camera, interpolacao visual, geracao procedural/seed (nenhum RNG aqui), save, menus, gamepad, HUD, qualquer ajuste final de velocidade do jogador. O `Command` e o `GameState` ficam minimos; os cards seguintes os estendem.
 
 ## Notas do dev
+- Feito: dados em `src/data/sim.ts` (maxTicksPerFrame, playerSpeedPxPerSecond); `src/sim/{types,step,clock}.ts` puros exportados no index; `GameScene` + `readCommand` em `src/render/` (EmptyScene removida); testes `tests/clock.test.ts` e `tests/step.test.ts`.
+- Decisoes: clock guarda ms e usa epsilon 1e-9 no floor (100 ms = 6 ticks, 60 quadros de 1000/60 = 60 ticks); com teto, o excedente e descartado e so o resto fracionario fica. Teste (d) verifica que nao ha literal 60 nem Date/performance/Math.random em src/sim.
+- Fora: nada ficou de fora.
+- `npm run test`: 4 arquivos, 14 testes passando. `npm run build`: ok (so aviso de chunk grande do Phaser).
 
 ## Comentarios
 - 2026-10-22 | PO | História pronta. Card técnico, pertence à fase 1 (Sprint 0). Menção a `src/data/` vem da seção 15 da bíblia.
@@ -70,3 +74,4 @@ Base atual no main: `src/data/sim.ts` ja tem `SIM.ticksPerSecond = 60`; `src/sim
 - 2026-10-22 14:32 | SM | arquiteto deixou bloqueado (depende de cards ainda não mergeados); aguarda Guilherme/dependências
 - 2026-10-22 14:45 | SM | desbloqueado com autorização do Guilherme: dependência 000 já está no main; resultado -> pendente
 - 2026-10-22 14:46 | SM | refinamento -> dev (arquiteto aprovou); worktree .worktrees/001 criado
+- 2026-10-22 14:47 | SM | dev -> review (dev aprovou)
