@@ -1,7 +1,7 @@
 ---
 id: 002
 titulo: Enzo se move livremente
-coluna: qa
+coluna: playtest
 resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 0
 fase: 1
@@ -79,6 +79,27 @@ Playtest: `sim` (seção 15). O Guilherme deve avaliar se 5 tiles/s e a diagonal
 - 2026-10-22 | Arquiteto | BLOQUEADO: depende dos cards 000 (esqueleto do projeto, nao ha package.json no main) e 001 (loop de passo fixo), ainda em refinamento e fora do `main`. Plano pronto; quando 000 e 001 estiverem no main, o SM pode resetar `resultado` para `aprovado` sem novo refinamento.
 
 - 2026-10-22 | Arquiteto | Plano revalidado contra o codigo real do 001: reaproveita step/Command/GameScene/readCommand, substitui os 240 px/s provisorios por 5 tiles/s x 64 px = 320 px/s vindos de `src/data/`, adiciona normalizacao da diagonal e remove setas (card pede so WASD). playtest: sim, estimativa P, aprovado.
+- 2026-10-22 | QA | resultado: aprovado. `npm install`, `npm run test -- --run` (5 arquivos, 25 testes passando) e `npm run build` (ok, so aviso de tamanho de chunk) rodados do zero no worktree .worktrees/002.
+
+| Critério | Evidência | Status |
+|---|---|---|
+| Placeholder: capsula escura com bone colorido, sem rosa do Boto | `src/render/playerView.ts` (mataEscura + contorno folhagem + bone fogo); grep: `rosaBoto` nao e usado fora de `palette.ts`. Aparencia final: playtest | ok (visual no playtest) |
+| W/A/S/D isolado: 5 tiles (320 px) em 60 updates | tests/movement.test.ts > "reta direita/esquerda/baixo/cima: 5 tiles em 60 ticks" | ok |
+| Diagonal mantem 5 tiles/s (hipotenusa 320, nao ~452) | tests/movement.test.ts > "diagonal (%i,%i) mantem 5 tiles/s" (4 combinacoes, com sinais) | ok |
+| Sem tecla, parado; teclas opostas se anulam | tests/movement.test.ts > "parado sem teclas", "teclas opostas se anulam" | ok |
+| Velocidade e tile vindos de `src/data/` | `src/data/player.ts`, `src/data/world.ts`; grep de 5/64/320 em `src/sim` sem ocorrencias; teste "velocidade vem dos dados" | ok |
+| Teste por simulacao sem navegador | tests/movement.test.ts (usa `run`/`createInitialState`, sem Phaser) | ok |
+
+Suite inteira passou (incluindo architecture e step), nada quebrou.
+
+Roteiro de playtest para o Guilherme:
+1. Rode `npm run dev` no worktree/branch card/002 e abra o jogo no navegador.
+2. Confira o Enzo: capsula escura com boné laranja (fogo) como unico detalhe de cor, sem rosa.
+3. Segure W, A, S e D (um por vez) e veja se 5 tiles/s parece a velocidade certa (cerca de 5 tiles por segundo, 1 tile = 64 px). As setas do teclado nao devem mover.
+4. Segure W+D, W+A, S+D e S+A: a diagonal nao pode parecer mais rapida que a reta.
+5. Solte tudo (Enzo para na hora) e aperte W+S ou A+D juntos (nao deve se mover nesse eixo).
+
+- 2026-10-22 | Revisor | Revisao do diff main...card/002 (feita ja na coluna qa): aprovado, passou em todo o checklist. Escopo restrito as tarefas; valores em `src/data/player.ts` e `world.ts`, sem literais em `src/sim`; diagonal normalizada com SQRT1_2; sim sem Phaser; sem Math.random/Date.now; setas removidas; placeholder sem rosaBoto; testes cobrem reta, diagonal, parado e opostos. (opcional) `RENDER.tilePx` ainda duplica `WORLD.tilePx` por alias; pode ser removido num card futuro.
 
 ## Historico
 - 2026-10-21 12:00 | SM | criado no backlog (Sprint 0)
@@ -88,3 +109,4 @@ Playtest: `sim` (seção 15). O Guilherme deve avaliar se 5 tiles/s e a diagonal
 - 2026-10-22 14:49 | SM | refinamento -> dev (arquiteto aprovou); worktree .worktrees/002 criado
 - 2026-10-22 14:50 | SM | dev -> review (dev aprovou)
 - 2026-10-22 14:50 | SM | review -> qa (revisor aprovou)
+- 2026-10-22 14:52 | SM | qa -> playtest (qa aprovou; revisor reconfirmou a revisão, registrada no card); aguarda Guilherme
