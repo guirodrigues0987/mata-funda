@@ -2,7 +2,7 @@
 id: 002
 titulo: Enzo se move livremente
 coluna: refinamento
-resultado: bloqueado      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
+resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 0
 fase: 1
 tipo: feature
@@ -71,3 +71,4 @@ Playtest: marcado `sim` (seção 15 da biblia exige playtest humano para movimen
 - 2026-10-21 12:00 | SM | criado no backlog (Sprint 0)
 - 2026-10-22 14:29 | SM | backlog -> refinamento (PO aprovou)
 - 2026-10-22 14:32 | SM | arquiteto deixou bloqueado (depende de cards ainda não mergeados); aguarda Guilherme/dependências
+- 2026-10-22 14:49 | SM | desbloqueado (autorização do Guilherme): dependências 000 e 001 estão no main; resultado -> pendente para o arquiteto revalidar o plano
