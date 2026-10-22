@@ -1,7 +1,7 @@
 ---
 id: 001
 titulo: Loop de simulação com passo fixo
-coluna: review
+coluna: qa
 resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 0
 fase: 1
@@ -67,6 +67,7 @@ Base atual no main: `src/data/sim.ts` ja tem `SIM.ticksPerSecond = 60`; `src/sim
 
 - 2026-10-22 | Arquiteto | Bloqueado: depende do card 000 (Esqueleto do projeto), que ainda não está no main. Não existem `package.json`, `src/`, `tests/`, Vitest nem TypeScript. Este card precisa de `src/sim`, `src/data` e `tests` e do runner de testes criados pelo 000. Quando o 000 estiver no main, o card volta a ser refinado. Estimativa prévia: P (loop acumulador de tempo em `src/sim`, função `step` pura, taxa em `src/data`, 2 testes), playtest: nao.
 - 2026-10-22 | Arquiteto | Plano pronto. Estimativa P, playtest nao, executor claude. Dependencia 000 ja esta no main. Atencao ao arredondamento do acumulador (100 ms = 6 ticks exatos).
+- 2026-10-22 | Revisor | Passou no checklist: escopo, separacao sim/render, dados em src/data, determinismo, testes (14 passando, build ok). (opcional) src/render/GameScene.ts:26 tem o tamanho 32 do marcador fixo no codigo; mover para src/data/render.ts no card de visual. (opcional) GameScene.ts importa hexToNumber de um segundo `import ... from "../sim"`; pode unir com os outros.
 
 ## Historico
 - 2026-10-21 12:00 | SM | criado no backlog (Sprint 0)
@@ -75,3 +76,4 @@ Base atual no main: `src/data/sim.ts` ja tem `SIM.ticksPerSecond = 60`; `src/sim
 - 2026-10-22 14:45 | SM | desbloqueado com autorização do Guilherme: dependência 000 já está no main; resultado -> pendente
 - 2026-10-22 14:46 | SM | refinamento -> dev (arquiteto aprovou); worktree .worktrees/001 criado
 - 2026-10-22 14:47 | SM | dev -> review (dev aprovou)
+- 2026-10-22 14:48 | SM | review -> qa (revisor aprovou)
