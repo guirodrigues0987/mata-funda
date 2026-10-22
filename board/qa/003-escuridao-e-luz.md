@@ -1,7 +1,7 @@
 ---
 id: 003
 titulo: Escuridão e luz em volta do Enzo
-coluna: review
+coluna: qa
 resultado: pendente     # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 0
 fase: 1
@@ -68,6 +68,7 @@ Estado do main: Enzo e um Graphics em `src/render/playerView.ts`; `state.player.
 - 2026-10-22 | PO | Citei a seção 12 só pelo valor de 64 px por tile, que também aparece na seção 4 (Mapa); a parte final da bíblia não foi lida por limite de leitura, e nenhum critério depende dela.
 - 2026-10-22 | Arquiteto | Bloqueado: o main ainda não tem código (sem src/, tests/ nem package.json). Este card depende de 000-esqueleto-do-projeto (Vite + Phaser + Vitest, cena base) e de 002-movimento-do-enzo (posição do Enzo no estado da simulação, que a luz precisa seguir), e 001 (passo fixo) para o estado ser atualizado. Replanejar quando 000 e 002 estiverem no main. Previsão: estimativa P, playtest nao (só render de luz, sem regra de jogo), sem dependência nova (luzes 2D já vêm no Phaser). Pontos para o plano futuro: raio 256 px e cenário de teste em src/data/ (ex. light.json, testScene.json); render em src/render/ usando this.lights.enable() e Light pipeline; teste Vitest só da função pura que decide se uma forma está dentro do raio.
 - 2026-10-22 | Arquiteto | Replanejado contra o main (000, 001, 002 presentes). Estimativa P, playtest nao (so visual). Risco: Light2D so afeta Image/Sprite, nao Graphics; por isso as formas de teste sao imagens geradas por textura. A borda da luz do Phaser e suave (falloff); aceitavel neste card.
+- 2026-10-22 | Revisor | Aprovado: passou em todo o checklist. Escopo restrito às tarefas, sim/ sem Phaser, valores em src/data, sem aleatoriedade, 31 testes passam e `npm run build` ok. (opcional) Os testes de limite exato usam 256 e 257 via largura 10; vale conferir visualmente no `npm run dev` que a intensidade 2 dá a borda esperada.
 
 ## Historico
 - 2026-10-21 12:00 | SM | criado no backlog (Sprint 0)
@@ -76,3 +77,4 @@ Estado do main: Enzo e um Graphics em `src/render/playerView.ts`; `state.player.
 - 2026-10-22 15:39 | SM | desbloqueado (autorização do Guilherme): dependências 000, 001 e 002 estão no main; resultado -> pendente para o arquiteto planejar
 - 2026-10-22 15:40 | SM | refinamento -> dev (arquiteto aprovou); worktree .worktrees/003 criado
 - 2026-10-22 15:40 | SM | dev -> review (dev aprovou)
+- 2026-10-22 15:41 | SM | review -> qa (revisor aprovou)
