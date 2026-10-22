@@ -65,3 +65,7 @@ Phaser 3 + TypeScript + Vite, testes com Vitest, publicado no GitHub Pages.
 - `npm run dev`: abre o jogo no navegador.
 - `npm run build`: gera a versão publicável em `dist/`.
 - `npm test`: roda os testes (Vitest).
+
+Jogo publicado: https://guirodrigues0987.github.io/mata-funda/
+
+Cada push no `main` roda os testes, gera o build e publica no GitHub Pages. Se um teste falhar, nada é publicado.
