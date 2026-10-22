@@ -1,7 +1,7 @@
 ---
 id: 000
 titulo: Esqueleto do projeto
-coluna: review
+coluna: qa
 resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 1
 fase: 1
@@ -72,6 +72,7 @@ Loop de passo fixo, Enzo, movimento, mapa, luzes dinamicas, nevoa, paralaxe, SVG
 - 2026-10-22 | Arquiteto | Plano pronto, estimativa P, playtest nao. Fora do codigo porque nao ha nada no main ainda (sem src/ nem package.json). Phaser e Vite sao exigidos pela bíblia/card; Vitest idem.
 - 2026-10-22 | PO | História escrita. Observação: a bíblia não lista as pastas em detalhe; usei as da Ideia do card (src/sim, src/render, src/data, tests), coerentes com a seção 15.
 - 2026-10-22 | Revisor | Reprovado. Problema unico: `package.json` linha 14 usa `"phaser": "^4.2.1"` (e o lock instalou 4.2.1), mas a tarefa 1 e a README ("Stack do jogo: Phaser 3") exigem Phaser 3.x. Trocar para a ultima 3.x (ex.: `^3.90.0`), rodar `npm install`, atualizar `package-lock.json` e conferir que `npm test` e `npm run build` seguem passando (ajustar imports/tipos se a API divergir). O resto passou no checklist: paleta bate com a biblia, sim sem Phaser, dados fora do codigo, testes presentes, teste e build verdes. (opcional) `tsconfig.json` inclui `vite.config.ts` alem de `src` e `tests`; justificado pelo dev, aceitavel.
+- 2026-10-22 | Revisor | Aprovado. Phaser agora ^3.90.0 (lock em 3.90.0); problema anterior resolvido. `npm test` (4 testes) e `npm run build` passam; passou em todo o checklist.
 
 ## Historico
 - 2026-10-21 12:00 | SM | criado no backlog (Sprint 0)
@@ -80,3 +81,4 @@ Loop de passo fixo, Enzo, movimento, mapa, luzes dinamicas, nevoa, paralaxe, SVG
 - 2026-10-22 14:37 | SM | dev -> review (dev aprovou)
 - 2026-10-22 14:40 | SM | review -> dev (revisor reprovou: Phaser 4 em vez de 3.x); retrabalho 1
 - 2026-10-22 14:42 | SM | dev -> review (dev aprovou retrabalho 1)
+- 2026-10-22 14:43 | SM | review -> qa (revisor aprovou)
