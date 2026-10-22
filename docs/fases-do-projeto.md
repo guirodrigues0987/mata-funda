@@ -9,7 +9,7 @@ Plano de execução em 4 fases. Estimativas considerando **10 a 15 horas por sem
 | 3 | História Completa | 4 a 6 meses | O jogo inteiro, do tutorial ao Boitatá |
 | 4 | Pós-jogo e Polimento | 2 a 3 meses | Revanche do Boto, Ecos, áudio e acabamento |
 
-> **Fase atual: 1** (o Scrum Master só puxa para refinamento cards com `fase` menor ou igual a este número; o Guilherme atualiza esta linha ao mudar de fase).
+> **Fase atual: 2** (o Scrum Master só puxa para refinamento cards com `fase` menor ou igual a este número; o Guilherme atualiza esta linha ao mudar de fase).
 
 **Regra geral:** cada fase só começa quando o critério de pronto da anterior for cumprido. A referência de conteúdo de todas as fases é a `docs/biblia-do-jogo.md`.
 
