@@ -1,0 +1,1 @@
+export { hexToNumber } from "./color";

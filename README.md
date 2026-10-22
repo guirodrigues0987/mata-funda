@@ -60,3 +60,8 @@ Cards `bloqueado` aparecem no resumo de cada rodada. Leia os comentários, resol
 
 ## Stack do jogo
 Phaser 3 + TypeScript + Vite, testes com Vitest, publicado no GitHub Pages.
+
+## Rodando o jogo
+- `npm run dev`: abre o jogo no navegador.
+- `npm run build`: gera a versão publicável em `dist/`.
+- `npm test`: roda os testes (Vitest).
