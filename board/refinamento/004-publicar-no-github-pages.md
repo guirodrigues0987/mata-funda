@@ -2,7 +2,7 @@
 id: 004
 titulo: Publicar o jogo no GitHub Pages
 coluna: refinamento
-resultado: bloqueado      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
+resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 0
 fase: 1
 tipo: tecnico
@@ -43,3 +43,4 @@ Como time, precisamos que cada push no main teste, gere o build e publique o jog
 - 2026-10-21 12:00 | SM | criado no backlog (Sprint 0)
 - 2026-10-22 14:29 | SM | backlog -> refinamento (PO aprovou)
 - 2026-10-22 14:32 | SM | arquiteto deixou bloqueado (depende de cards ainda não mergeados); aguarda Guilherme/dependências
+- 2026-10-22 14:45 | SM | desbloqueado com autorização do Guilherme: dependência 000 já está no main; resultado -> pendente

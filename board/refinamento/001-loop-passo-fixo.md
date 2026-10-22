@@ -2,7 +2,7 @@
 id: 001
 titulo: Loop de simulação com passo fixo
 coluna: refinamento
-resultado: bloqueado      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
+resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 0
 fase: 1
 tipo: tecnico
@@ -43,3 +43,4 @@ Como time, precisamos de uma simulação que roda em passo fixo de 60 atualizaç
 - 2026-10-21 12:00 | SM | criado no backlog (Sprint 0)
 - 2026-10-22 14:29 | SM | backlog -> refinamento (PO aprovou)
 - 2026-10-22 14:32 | SM | arquiteto deixou bloqueado (depende de cards ainda não mergeados); aguarda Guilherme/dependências
+- 2026-10-22 14:45 | SM | desbloqueado com autorização do Guilherme: dependência 000 já está no main; resultado -> pendente
