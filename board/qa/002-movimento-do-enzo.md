@@ -1,7 +1,7 @@
 ---
 id: 002
 titulo: Enzo se move livremente
-coluna: review
+coluna: qa
 resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 0
 fase: 1
@@ -87,3 +87,4 @@ Playtest: `sim` (seção 15). O Guilherme deve avaliar se 5 tiles/s e a diagonal
 - 2026-10-22 14:49 | SM | desbloqueado (autorização do Guilherme): dependências 000 e 001 estão no main; resultado -> pendente para o arquiteto revalidar o plano
 - 2026-10-22 14:49 | SM | refinamento -> dev (arquiteto aprovou); worktree .worktrees/002 criado
 - 2026-10-22 14:50 | SM | dev -> review (dev aprovou)
+- 2026-10-22 14:50 | SM | review -> qa (revisor aprovou)
