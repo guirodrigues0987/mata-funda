@@ -1,7 +1,7 @@
 ---
 id: 005
 titulo: Câmera que segue o Enzo e mapa com colisão
-coluna: review
+coluna: qa
 resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 0
 fase: 2
@@ -71,6 +71,7 @@ Estado atual do main: o Enzo vive em coordenadas relativas ao centro da tela (st
 - 2026-10-22 | PO | Aviso ao SM: este card é da fase 2 e a fase atual no documento de fases ainda é 1.
 
 - 2026-10-22 | Arquiteto | Aprovado, estimativa M. playtest: sim (movimento e colisao mexem na sensacao de jogo, biblia secao 15). Fase atual ja e 2. Deslize pela parede escolhido (eixos separados), por ser o mais simples e deterministico.
+- 2026-10-22 | Revisor | Aprovado: passou no checklist (escopo, bíblia, separação sim/render, dados em src/data, determinismo, testes, segurança). npm test: 52 passando; npm run build: ok. Colisão pura em src/sim/collision.ts sem Phaser, mapa vindo de src/data/testMap.ts, 8 direções testadas no mapa pequeno e no TEST_MAP. Câmera, luz e visual do mapa não foram verificados no navegador (ficam para o QA/playtest). (opcional) `TileMap` exportado em src/data/testMap.ts não é usado em lugar nenhum; remover ou usar `TileGrid` da sim. (opcional) Comentário "Mapa fixo de teste" é o único lugar que define `#`/`.`; considerar constante nomeada em data se aparecer mais uso.
 
 ## Historico
 - 2026-10-22 15:58 | SM | criado no backlog (Fase 2)
@@ -78,3 +79,4 @@ Estado atual do main: o Enzo vive em coordenadas relativas ao centro da tela (st
 - 2026-10-22 16:51 | SM | backlog -> refinamento (PO aprovou; Fase atual agora é 2)
 - 2026-10-22 16:52 | SM | refinamento -> dev (arquiteto aprovou; playtest: sim); worktree .worktrees/005 criado. 006, 007 e 008 esperam para não conflitarem em step.ts
 - 2026-10-22 16:54 | SM | dev -> review (dev aprovou)
+- 2026-10-22 16:54 | SM | review -> qa (revisor aprovou)
