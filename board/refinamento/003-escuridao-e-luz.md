@@ -2,13 +2,13 @@
 id: 003
 titulo: Escuridão e luz em volta do Enzo
 coluna: refinamento
-resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
+resultado: bloqueado     # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 0
 fase: 1
 tipo: feature
 executor: claude
 playtest: nao
-estimativa:
+estimativa: P
 branch:
 ---
 
@@ -39,7 +39,9 @@ Como jogador, quero ver só o que está dentro do raio da lanterna do celular em
 ## Comentarios
 - 2026-10-22 | PO | Fora do escopo de propósito: memória do mapa (partes já vistas em tom apagado), carga/bateria, HUD, tecla L e raio de 1,5 tile sem carga. Cada um merece card próprio.
 - 2026-10-22 | PO | Citei a seção 12 só pelo valor de 64 px por tile, que também aparece na seção 4 (Mapa); a parte final da bíblia não foi lida por limite de leitura, e nenhum critério depende dela.
+- 2026-10-22 | Arquiteto | Bloqueado: o main ainda não tem código (sem src/, tests/ nem package.json). Este card depende de 000-esqueleto-do-projeto (Vite + Phaser + Vitest, cena base) e de 002-movimento-do-enzo (posição do Enzo no estado da simulação, que a luz precisa seguir), e 001 (passo fixo) para o estado ser atualizado. Replanejar quando 000 e 002 estiverem no main. Previsão: estimativa P, playtest nao (só render de luz, sem regra de jogo), sem dependência nova (luzes 2D já vêm no Phaser). Pontos para o plano futuro: raio 256 px e cenário de teste em src/data/ (ex. light.json, testScene.json); render em src/render/ usando this.lights.enable() e Light pipeline; teste Vitest só da função pura que decide se uma forma está dentro do raio.
 
 ## Historico
 - 2026-10-21 12:00 | SM | criado no backlog (Sprint 0)
 - 2026-10-22 14:29 | SM | backlog -> refinamento (PO aprovou)
+- 2026-10-22 14:32 | SM | arquiteto deixou bloqueado (depende de cards ainda não mergeados); aguarda Guilherme/dependências

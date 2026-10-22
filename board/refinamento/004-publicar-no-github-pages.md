@@ -2,7 +2,7 @@
 id: 004
 titulo: Publicar o jogo no GitHub Pages
 coluna: refinamento
-resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
+resultado: bloqueado      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 0
 fase: 1
 tipo: tecnico
@@ -37,7 +37,9 @@ Como time, precisamos que cada push no main teste, gere o build e publique o jog
 
 ## Comentarios
 - 2026-10-22 | PO | Depende do card 000 (esqueleto com testes e build). Sem texto de jogo neste card.
+- 2026-10-22 | Arquiteto | Bloqueado: depende do card 000 (esqueleto), que ainda não está no `main` (não existem `package.json`, `src/`, `tests/` nem config de build). O plano do workflow depende dos scripts reais de `test` e `build` e do diretório de saída (`dist/`) e do `base` do Vite para evitar 404 em subcaminho do Pages. Replanejar quando o 000 estiver no `main`.
 
 ## Historico
 - 2026-10-21 12:00 | SM | criado no backlog (Sprint 0)
 - 2026-10-22 14:29 | SM | backlog -> refinamento (PO aprovou)
+- 2026-10-22 14:32 | SM | arquiteto deixou bloqueado (depende de cards ainda não mergeados); aguarda Guilherme/dependências

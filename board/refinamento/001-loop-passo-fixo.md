@@ -2,7 +2,7 @@
 id: 001
 titulo: Loop de simulação com passo fixo
 coluna: refinamento
-resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
+resultado: bloqueado      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 0
 fase: 1
 tipo: tecnico
@@ -37,6 +37,9 @@ Como time, precisamos de uma simulação que roda em passo fixo de 60 atualizaç
 ## Comentarios
 - 2026-10-22 | PO | História pronta. Card técnico, pertence à fase 1 (Sprint 0). Menção a `src/data/` vem da seção 15 da bíblia.
 
+- 2026-10-22 | Arquiteto | Bloqueado: depende do card 000 (Esqueleto do projeto), que ainda não está no main. Não existem `package.json`, `src/`, `tests/`, Vitest nem TypeScript. Este card precisa de `src/sim`, `src/data` e `tests` e do runner de testes criados pelo 000. Quando o 000 estiver no main, o card volta a ser refinado. Estimativa prévia: P (loop acumulador de tempo em `src/sim`, função `step` pura, taxa em `src/data`, 2 testes), playtest: nao.
+
 ## Historico
 - 2026-10-21 12:00 | SM | criado no backlog (Sprint 0)
 - 2026-10-22 14:29 | SM | backlog -> refinamento (PO aprovou)
+- 2026-10-22 14:32 | SM | arquiteto deixou bloqueado (depende de cards ainda não mergeados); aguarda Guilherme/dependências
