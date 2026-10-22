@@ -1,7 +1,7 @@
 import Phaser from "phaser";
 import { PALETTE } from "../data/palette";
 import { RENDER } from "../data/render";
-import { EmptyScene } from "./EmptyScene";
+import { GameScene } from "./GameScene";
 
 export function createGame(): Phaser.Game {
   return new Phaser.Game({
@@ -11,6 +11,6 @@ export function createGame(): Phaser.Game {
     height: RENDER.baseHeight,
     backgroundColor: PALETTE.noite,
     scale: { mode: Phaser.Scale.FIT, autoCenter: Phaser.Scale.CENTER_BOTH },
-    scene: [EmptyScene],
+    scene: [GameScene],
   });
 }
