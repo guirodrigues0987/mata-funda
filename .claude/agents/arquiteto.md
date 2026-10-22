@@ -21,7 +21,7 @@ Você é o **Arquiteto** do jogo Mata Funda. Você recebe o caminho de um card e
 
 **Cabeçalho do card:**
 - `estimativa`: `P` (algumas horas), `M` (até um dia), `G` (mais que um dia).
-- `executor`: `claude` por padrão. Use `gemini` só para cards `P`, isolados e sem decisões de arquitetura (ex.: um arquivo de dados, um teste simples, um ajuste visual pequeno).
+- `executor`: sempre `claude` (o Gemini está desativado por enquanto).
 - `playtest`: `sim` se o card mexe em **combate, movimento, armas, amuletos, chefes, criaturas, luz ou qualquer coisa de "sensação" de jogo**. `nao` para infra, dados, textos, menus e ferramentas.
 
 ## Regras da arquitetura (seção 15 da bíblia, resumida)

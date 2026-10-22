@@ -32,12 +32,6 @@ npm run build
 ```
 Os dois têm que passar. Se não passarem, conserte. Nunca entregue com teste falhando e nunca desligue ou apague teste para passar.
 
-## Se o executor for gemini
-Se o card tem `executor: gemini`, você delega a implementação ao Gemini CLI e depois confere:
-1. Monte um prompt com a história, os critérios, as tarefas técnicas e as regras da seção 15 da bíblia.
-2. Rode o Gemini em modo não interativo dentro do worktree (confira as flags na documentação do Gemini CLI instalado, com `gemini --help`).
-3. **Você continua responsável:** revise o que ele fez, rode os testes e o build, corrija o que for preciso. Em `## Notas do dev`, registre que o Gemini foi usado e o que você precisou ajustar.
-
 ## Ao terminar
 Escreva em `## Notas do dev`:
 - O que foi feito, em poucas linhas.

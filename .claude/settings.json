@@ -10,7 +10,6 @@
       "Bash(npm run:*)",
       "Bash(npm test:*)",
       "Bash(npx:*)",
-      "Bash(gemini:*)",
       "Bash(ls:*)",
       "Bash(cat:*)",
       "Bash(mkdir:*)",

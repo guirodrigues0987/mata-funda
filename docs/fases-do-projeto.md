@@ -23,7 +23,7 @@ Plano de execução em 4 fases. Estimativas considerando **10 a 15 horas por sem
 
 **Semana 1 — Infra e kit**
 - Criar o repositório `mata-funda` no GitHub com o kit inicial (Scrum Master, subagentes, quadro, bíblia).
-- Montar a VPS seguindo o `setup-vps.md`: usuário `agentes`, Claude Code, Gemini CLI, deploy key, tmux.
+- Montar a VPS seguindo o `setup-vps.md`: usuário `agentes`, Claude Code, deploy key, tmux.
 - Primeira rodada manual no tmux, só para ver o Scrum Master ler o quadro e responder.
 
 **Semana 2 — Sprint 0 (cards de teste da esteira)**
@@ -36,10 +36,9 @@ Plano de execução em 4 fases. Estimativas considerando **10 a 15 horas por sem
 - Acompanhar cada card passando por todas as colunas e anotar onde cada agente erra.
 - Ajustar os arquivos dos subagentes a cada erro (essa é a parte mais importante da fase).
 
-**Semana 3 — Automação e Gemini**
+**Semana 3 — Automação**
 - Ligar as rodadas automáticas no cron, começando com intervalo de 60 minutos.
-- Medir o consumo de cota do Claude Code e do Gemini por rodada.
-- Testar o Gemini como executor em um card simples (`executor: gemini`).
+- Medir o consumo de cota do Claude Code por rodada.
 - Publicar o jogo no GitHub Pages (mesmo que seja só um quadrado andando no escuro).
 
 ### Critério de pronto

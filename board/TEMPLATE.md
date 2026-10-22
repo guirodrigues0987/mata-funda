@@ -6,7 +6,7 @@ resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancela
 retrabalho: 0            # quantas vezes voltou para dev
 fase: 1                  # fase do projeto (docs/fases-do-projeto.md)
 tipo: feature            # feature | bug | tecnico | conteudo
-executor: claude         # claude | gemini  (definido pelo arquiteto)
+executor: claude         # por enquanto sempre claude
 playtest: nao            # sim | nao        (definido pelo arquiteto)
 estimativa: P            # P | M | G         (definido pelo arquiteto)
 branch:                  # preenchido pelo SM ao entrar em dev
