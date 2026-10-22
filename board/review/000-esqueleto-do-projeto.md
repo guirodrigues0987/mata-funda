@@ -1,7 +1,7 @@
 ---
 id: 000
 titulo: Esqueleto do projeto
-coluna: dev
+coluna: review
 resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 0
 fase: 1
@@ -62,6 +62,10 @@ Criar: `package.json`, `package-lock.json`, `tsconfig.json`, `vite.config.ts`, `
 Loop de passo fixo, Enzo, movimento, mapa, luzes dinamicas, nevoa, paralaxe, SVG, audio, save local, seed, menus, CI, deploy. Nao criar outras cenas nem assets. Nao adicionar ESLint/Prettier.
 
 ## Notas do dev
+- Feito: projeto Vite + Phaser 3 + TS + Vitest, pastas src/sim, src/render, src/data, tests; EmptyScene com fundo PALETTE.noite; FIT 1920x1080; testes de cor e arquitetura; README atualizado.
+- Decisoes: dados em `.ts` (formato unico em src/data). Adicionei `@types/node` (devDependency) e `skipLibCheck`/`types: node` no tsconfig para os testes usarem `fs` sob `tsc --noEmit`. vite.config importa de `vitest/config`.
+- Fora: nada. Build avisa de chunk > 500kB (Phaser), esperado.
+- `npm run test -- --run`: 2 arquivos, 4 testes passando. `npm run build`: sem erros.
 
 ## Comentarios
 - 2026-10-22 | Arquiteto | Plano pronto, estimativa P, playtest nao. Fora do codigo porque nao ha nada no main ainda (sem src/ nem package.json). Phaser e Vite sao exigidos pela bíblia/card; Vitest idem.
@@ -71,3 +75,4 @@ Loop de passo fixo, Enzo, movimento, mapa, luzes dinamicas, nevoa, paralaxe, SVG
 - 2026-10-21 12:00 | SM | criado no backlog (Sprint 0)
 - 2026-10-22 14:29 | SM | backlog -> refinamento (PO aprovou)
 - 2026-10-22 14:32 | SM | refinamento -> dev (arquiteto aprovou); worktree .worktrees/000 criado
+- 2026-10-22 14:37 | SM | dev -> review (dev aprovou)
