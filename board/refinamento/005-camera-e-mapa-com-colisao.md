@@ -1,8 +1,8 @@
 ---
 id: 005
 titulo: Câmera que segue o Enzo e mapa com colisão
-coluna: backlog
-resultado: aprovado      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
+coluna: refinamento
+resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 0
 fase: 2
 tipo: feature
@@ -48,3 +48,4 @@ Como jogador, quero que a câmera acompanhe o Enzo por um mapa com paredes e obs
 ## Historico
 - 2026-10-22 15:58 | SM | criado no backlog (Fase 2)
 - 2026-10-22 15:59 | SM | PO aprovou; card fica no backlog: fase 2 > fase atual 1 (aguarda Guilherme atualizar docs/fases-do-projeto.md)
+- 2026-10-22 16:51 | SM | backlog -> refinamento (PO aprovou; Fase atual agora é 2)
