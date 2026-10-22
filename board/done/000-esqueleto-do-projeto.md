@@ -2,7 +2,7 @@
 id: 000
 titulo: Esqueleto do projeto
 coluna: done
-resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
+resultado: concluido      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 1
 fase: 1
 tipo: tecnico
@@ -96,3 +96,4 @@ resultado: pendente
 - 2026-10-22 14:42 | SM | dev -> review (dev aprovou retrabalho 1)
 - 2026-10-22 14:43 | SM | review -> qa (revisor aprovou)
 - 2026-10-22 14:43 | SM | qa -> done (qa aprovou; playtest: nao)
+- 2026-10-22 14:44 | SM | redator aprovou; merge de card/000 no main; worktree e branch removidos; concluido
