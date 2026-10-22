@@ -4,6 +4,8 @@ import { join } from "node:path";
 import { createInitialState, run, step } from "../src/sim";
 import type { Command, GameState } from "../src/sim";
 import { SIM } from "../src/data/sim";
+import { PLAYER } from "../src/data/player";
+import { WORLD } from "../src/data/world";
 
 const right: Command = { moveX: 1, moveY: 0 };
 const none: Command = { moveX: 0, moveY: 0 };
@@ -27,7 +29,7 @@ describe("step", () => {
     const b = run(createInitialState(), cmds);
     expect(a).toEqual(b);
     expect(a.tick).toBe(30);
-    expect(a.player.x).toBeCloseTo((30 * SIM.playerSpeedPxPerSecond) / SIM.ticksPerSecond, 9);
+    expect(a.player.x).toBeCloseTo((30 * PLAYER.speedTilesPerSecond * WORLD.tilePx) / SIM.ticksPerSecond, 9);
   });
   it("60 ticks equivalem a 1 segundo", () => {
     const s = run(createInitialState(), Array.from({ length: 60 }, () => none));
