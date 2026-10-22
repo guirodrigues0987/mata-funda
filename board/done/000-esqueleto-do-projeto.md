@@ -1,7 +1,7 @@
 ---
 id: 000
 titulo: Esqueleto do projeto
-coluna: qa
+coluna: done
 resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 1
 fase: 1
@@ -74,6 +74,19 @@ Loop de passo fixo, Enzo, movimento, mapa, luzes dinamicas, nevoa, paralaxe, SVG
 - 2026-10-22 | Revisor | Reprovado. Problema unico: `package.json` linha 14 usa `"phaser": "^4.2.1"` (e o lock instalou 4.2.1), mas a tarefa 1 e a README ("Stack do jogo: Phaser 3") exigem Phaser 3.x. Trocar para a ultima 3.x (ex.: `^3.90.0`), rodar `npm install`, atualizar `package-lock.json` e conferir que `npm test` e `npm run build` seguem passando (ajustar imports/tipos se a API divergir). O resto passou no checklist: paleta bate com a biblia, sim sem Phaser, dados fora do codigo, testes presentes, teste e build verdes. (opcional) `tsconfig.json` inclui `vite.config.ts` alem de `src` e `tests`; justificado pelo dev, aceitavel.
 - 2026-10-22 | Revisor | Aprovado. Phaser agora ^3.90.0 (lock em 3.90.0); problema anterior resolvido. `npm test` (4 testes) e `npm run build` passam; passou em todo o checklist.
 
+- 2026-10-22 | QA | Aprovado. `npm install`, `npm run test -- --run` (2 arquivos, 4 testes) e `npm run build` (tsc + vite, so aviso de chunk do Phaser) passaram no worktree 000; arvore limpa.
+
+| Criterio | Evidencia | Status |
+|---|---|---|
+| `npm run dev` com cena vazia e fundo Noite | `src/render/EmptyScene.ts` (setBackgroundColor(PALETTE.noite)), `createGame.ts` (backgroundColor), `index.html`; script `dev` = `vite`. Leitura de codigo, navegador nao aberto | ok |
+| 1920x1080 escalado mantendo proporcao | `createGame.ts`: width/height de RENDER, Scale.FIT + CENTER_BOTH; tests/architecture.test.ts > RENDER 1920/1080 | ok |
+| `npm run build` sem erros | build rodado: tsc --noEmit e vite build ok, gera dist/ | ok |
+| `npm test` passa, sem navegador | vitest run, ambiente node: 4 testes (tests/color.test.ts, tests/architecture.test.ts) | ok |
+| Pastas src/sim, render, data, tests; sim sem Phaser | pastas existem; grep por `phaser` e `render/` em src/sim vazio; tests/architecture.test.ts | ok |
+| Cor Noite em src/data | `src/data/palette.ts` noite "#0b0f0c"; grep de hex em src/render vazio | ok |
+
+resultado: pendente
+
 ## Historico
 - 2026-10-21 12:00 | SM | criado no backlog (Sprint 0)
 - 2026-10-22 14:29 | SM | backlog -> refinamento (PO aprovou)
@@ -82,3 +95,4 @@ Loop de passo fixo, Enzo, movimento, mapa, luzes dinamicas, nevoa, paralaxe, SVG
 - 2026-10-22 14:40 | SM | review -> dev (revisor reprovou: Phaser 4 em vez de 3.x); retrabalho 1
 - 2026-10-22 14:42 | SM | dev -> review (dev aprovou retrabalho 1)
 - 2026-10-22 14:43 | SM | review -> qa (revisor aprovou)
+- 2026-10-22 14:43 | SM | qa -> done (qa aprovou; playtest: nao)
