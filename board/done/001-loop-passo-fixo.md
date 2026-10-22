@@ -2,7 +2,7 @@
 id: 001
 titulo: Loop de simulação com passo fixo
 coluna: done
-resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
+resultado: concluido      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 0
 fase: 1
 tipo: tecnico
@@ -90,3 +90,4 @@ Nenhum teste extra foi necessario (cobertura existente prova todos os criterios)
 - 2026-10-22 14:47 | SM | dev -> review (dev aprovou)
 - 2026-10-22 14:48 | SM | review -> qa (revisor aprovou)
 - 2026-10-22 14:48 | SM | qa -> done (qa aprovou; playtest: nao)
+- 2026-10-22 14:49 | SM | redator aprovou; merge de card/001 no main; worktree e branch removidos; concluido

@@ -17,3 +17,10 @@ Quem fez: PO → Arquiteto (bloqueou uma vez, depois aprovou) → Dev (Claude) �
 Retrabalhos: 0
 O que mudou no jogo: a cada push no main, o GitHub roda os testes, gera o build e publica o jogo numa URL pública; se um teste falhar, nada é publicado.
 Curiosidade: o Arquiteto primeiro travou o card porque o esqueleto do projeto ainda não estava no main, e só liberou o plano depois. O primeiro deploy ainda depende do Guilherme ativar Pages com Source = GitHub Actions (e de uma credencial com escopo workflow).
+
+
+### 2026-10-22 — Card 001: Loop de simulação com passo fixo
+Quem fez: PO → Arquiteto (bloqueou uma vez, depois aprovou) → Dev (Claude) → Revisor → QA
+Retrabalhos: 0
+O que mudou no jogo: a simulação agora roda em passo fixo de 60 atualizações por segundo, separada do desenho na tela, e um quadrado de teste se move com as setas ou WASD.
+Curiosidade: o Arquiteto avisou do perigo de arredondamento no relógio: 100 ms precisam dar exatamente 6 ticks. O Dev resolveu com uma tolerância minúscula, e 60 quadros de 1000/60 ms fecham em 60 ticks certinhos. Um teto de 10 ticks por quadro evita que o jogo trave ao voltar de uma aba em segundo plano.
