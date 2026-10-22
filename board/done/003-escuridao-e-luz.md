@@ -1,7 +1,7 @@
 ---
 id: 003
 titulo: Escuridão e luz em volta do Enzo
-coluna: qa
+coluna: done
 resultado: pendente     # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 0
 fase: 1
@@ -69,6 +69,18 @@ Estado do main: Enzo e um Graphics em `src/render/playerView.ts`; `state.player.
 - 2026-10-22 | Arquiteto | Bloqueado: o main ainda não tem código (sem src/, tests/ nem package.json). Este card depende de 000-esqueleto-do-projeto (Vite + Phaser + Vitest, cena base) e de 002-movimento-do-enzo (posição do Enzo no estado da simulação, que a luz precisa seguir), e 001 (passo fixo) para o estado ser atualizado. Replanejar quando 000 e 002 estiverem no main. Previsão: estimativa P, playtest nao (só render de luz, sem regra de jogo), sem dependência nova (luzes 2D já vêm no Phaser). Pontos para o plano futuro: raio 256 px e cenário de teste em src/data/ (ex. light.json, testScene.json); render em src/render/ usando this.lights.enable() e Light pipeline; teste Vitest só da função pura que decide se uma forma está dentro do raio.
 - 2026-10-22 | Arquiteto | Replanejado contra o main (000, 001, 002 presentes). Estimativa P, playtest nao (so visual). Risco: Light2D so afeta Image/Sprite, nao Graphics; por isso as formas de teste sao imagens geradas por textura. A borda da luz do Phaser e suave (falloff); aceitavel neste card.
 - 2026-10-22 | Revisor | Aprovado: passou em todo o checklist. Escopo restrito às tarefas, sim/ sem Phaser, valores em src/data, sem aleatoriedade, 31 testes passam e `npm run build` ok. (opcional) Os testes de limite exato usam 256 e 257 via largura 10; vale conferir visualmente no `npm run dev` que a intensidade 2 dá a borda esperada.
+- 2026-10-22 | QA | resultado: aprovado. `npm install`, `npm run test -- --run` (6 arquivos, 31 testes) e `npm run build` passaram (só aviso de tamanho de chunk). IMPORTANTE: não consegui abrir o jogo no navegador (sem ambiente gráfico); os itens visuais foram "verificados só por código/testes".
+
+| Critério | Evidência | Status |
+|---|---|---|
+| Fora do raio escuro, dentro visível | Ambiente `noite` (#0b0f0c) em `lightView.ts` + formas como Image com Light2D em `testSceneView.ts`; render real não visto | ok, verificado só por código/testes |
+| Raio de 4 tiles = 256 px, círculo, centrado no Enzo | tests/light.test.ts > "raio em px vem dos dados" (256); `addLight(..., lightRadiusPx(), ...)` posicionada em `updateLight` no centro do Enzo | ok (raio por teste; aparência circular só por código) |
+| Luz acompanha o Enzo sem atraso | `GameScene.draw` chama `updateLight(state.player)` junto com o marcador, no mesmo frame; tests/light.test.ts > "acompanha o Enzo andando" cobre a lógica; fluidez real não vista | ok, verificado só por código/testes |
+| Cenário com >= 5 formas, dentro e fora, iluminadas só no raio | `TEST_SCENE` tem 6 formas (a, b dentro; c, d, e, f fora); tests/light.test.ts > "cenario de teste", "dentro e fora", "limite exato", "diagonal usa o canto mais proximo" | ok (visibilidade visual só por código/testes) |
+| Usa luzes 2D do Phaser | `scene.lights.enable/addLight` e `setPipeline("Light2D")` | ok |
+| Luz fixa, sem bateria/HUD/tecla L | grep em `src/` sem bateria, HUD nem tecla L; só WASD | ok |
+
+Observações para o Guilherme (não bloqueiam): a intensidade 2 e a borda suave do Phaser nunca foram vistas; se a borda parecer fora do círculo de 256 px, ajustar `LIGHT.intensity` em `src/data/light.ts`. Suíte completa passou, nada existente quebrou.
 
 ## Historico
 - 2026-10-21 12:00 | SM | criado no backlog (Sprint 0)
@@ -78,3 +90,4 @@ Estado do main: Enzo e um Graphics em `src/render/playerView.ts`; `state.player.
 - 2026-10-22 15:40 | SM | refinamento -> dev (arquiteto aprovou); worktree .worktrees/003 criado
 - 2026-10-22 15:40 | SM | dev -> review (dev aprovou)
 - 2026-10-22 15:41 | SM | review -> qa (revisor aprovou)
+- 2026-10-22 15:41 | SM | qa -> done (qa aprovou; playtest: nao; visual da luz verificado só por código/testes)
