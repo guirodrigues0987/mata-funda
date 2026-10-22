@@ -1,7 +1,7 @@
 ---
 id: 003
 titulo: Escuridão e luz em volta do Enzo
-coluna: dev
+coluna: review
 resultado: pendente     # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 0
 fase: 1
@@ -59,6 +59,9 @@ Estado do main: Enzo e um Graphics em `src/render/playerView.ts`; `state.player.
 **Fora do escopo**: memoria do mapa (partes ja vistas), bateria/carga, HUD, tecla L, raio reduzido sem carga, iluminar o Enzo, normal maps, colisao com as formas, camera que segue o Enzo, nevoa, particulas, luz de borda, cor por area, mapa real. As formas de teste sao provisorias.
 
 ## Notas do dev
+- Feito: LIGHT e TEST_SCENE em src/data; sim/light.ts (lightRadiusPx, isLit); render/lightView.ts (Light2D, ambiente noite, luz seguindo o Enzo no draw); render/testSceneView.ts (6 formas como Image com textura gerada e pipeline Light2D); GameScene integrada; tests/light.test.ts.
+- Decisao: o Enzo segue como Graphics sem luz (sempre visivel). Em 60 ticks o Enzo anda 320 px (nao 300); testes usam os valores reais. Intensidade da luz = 2 (ajustavel em LIGHT). Nao conferi visualmente no navegador (sem ambiente grafico); a borda e suave por falloff do Phaser.
+- Testes: npm run test -- --run: 31 passaram. npm run build: ok (so aviso de tamanho de chunk).
 
 ## Comentarios
 - 2026-10-22 | PO | Fora do escopo de propósito: memória do mapa (partes já vistas em tom apagado), carga/bateria, HUD, tecla L e raio de 1,5 tile sem carga. Cada um merece card próprio.
@@ -72,3 +75,4 @@ Estado do main: Enzo e um Graphics em `src/render/playerView.ts`; `state.player.
 - 2026-10-22 14:32 | SM | arquiteto deixou bloqueado (depende de cards ainda não mergeados); aguarda Guilherme/dependências
 - 2026-10-22 15:39 | SM | desbloqueado (autorização do Guilherme): dependências 000, 001 e 002 estão no main; resultado -> pendente para o arquiteto planejar
 - 2026-10-22 15:40 | SM | refinamento -> dev (arquiteto aprovou); worktree .worktrees/003 criado
+- 2026-10-22 15:40 | SM | dev -> review (dev aprovou)
