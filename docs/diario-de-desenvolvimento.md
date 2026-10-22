@@ -31,3 +31,10 @@ Quem fez: PO → Arquiteto (bloqueou uma vez, depois aprovou) → Dev (Claude) �
 Retrabalhos: 0
 O que mudou no jogo: o Enzo ganhou corpo de cápsula escura com boné laranja e anda em 8 direções com WASD a 5 tiles por segundo, sem ficar mais rápido na diagonal.
 Curiosidade: o PO tinha marcado o card sem playtest, mas o Arquiteto lembrou que a bíblia manda playtest para todo card de movimento. A velocidade provisória do card 001 (240 px/s) deu lugar aos 320 px/s definitivos, agora lidos de arquivos de dados, e a diagonal foi corrigida com um teste que confere 320 px de distância em vez de ~452.
+
+
+### 2026-10-22 — Card 003: Escuridão e luz em volta do Enzo
+Quem fez: PO → Arquiteto (bloqueou uma vez, depois aprovou) → Dev (Claude) → Revisor → QA
+Retrabalhos: 0
+O que mudou no jogo: a tela ficou na escuridão e só um círculo de 4 tiles em volta do Enzo, a lanterna do celular, revela o que está por perto, usando as luzes 2D do Phaser.
+Curiosidade: o Arquiteto avisou que a luz do Phaser só afeta imagens, não desenhos simples, então as formas de teste viraram texturas geradas por código, e o Enzo continua sem luz, sempre visível. Ponto de honestidade: ninguém viu o efeito rodando no navegador (o ambiente não tem tela). Raio, posição e lógica foram checados por 31 testes e pelo build, mas a intensidade 2 e a borda suave da luz ainda precisam do olho do Guilherme.

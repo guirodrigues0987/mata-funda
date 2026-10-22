@@ -2,7 +2,7 @@
 id: 003
 titulo: Escuridão e luz em volta do Enzo
 coluna: done
-resultado: pendente     # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
+resultado: concluido     # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 0
 fase: 1
 tipo: feature
@@ -91,3 +91,4 @@ Observações para o Guilherme (não bloqueiam): a intensidade 2 e a borda suave
 - 2026-10-22 15:40 | SM | dev -> review (dev aprovou)
 - 2026-10-22 15:41 | SM | review -> qa (revisor aprovou)
 - 2026-10-22 15:41 | SM | qa -> done (qa aprovou; playtest: nao; visual da luz verificado só por código/testes)
+- 2026-10-22 15:42 | SM | redator aprovou; merge de card/003 no main; worktree e branch removidos; concluido
