@@ -1,7 +1,7 @@
 ---
 id: 005
 titulo: Câmera que segue o Enzo e mapa com colisão
-coluna: qa
+coluna: playtest
 resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 0
 fase: 2
@@ -72,6 +72,28 @@ Estado atual do main: o Enzo vive em coordenadas relativas ao centro da tela (st
 
 - 2026-10-22 | Arquiteto | Aprovado, estimativa M. playtest: sim (movimento e colisao mexem na sensacao de jogo, biblia secao 15). Fase atual ja e 2. Deslize pela parede escolhido (eixos separados), por ser o mais simples e deterministico.
 - 2026-10-22 | Revisor | Aprovado: passou no checklist (escopo, bíblia, separação sim/render, dados em src/data, determinismo, testes, segurança). npm test: 52 passando; npm run build: ok. Colisão pura em src/sim/collision.ts sem Phaser, mapa vindo de src/data/testMap.ts, 8 direções testadas no mapa pequeno e no TEST_MAP. Câmera, luz e visual do mapa não foram verificados no navegador (ficam para o QA/playtest). (opcional) `TileMap` exportado em src/data/testMap.ts não é usado em lugar nenhum; remover ou usar `TileGrid` da sim. (opcional) Comentário "Mapa fixo de teste" é o único lugar que define `#`/`.`; considerar constante nomeada em data se aparecer mais uso.
+- 2026-10-22 | QA | resultado: aprovado. Worktree .worktrees/005: npm install ok; npm run test: 55 passando (52 existentes + 3 de QA, 8 arquivos); npm run build ok (so aviso de tamanho de chunk). Testes de QA commitados em tests/qa/card-005.test.ts no branch card/005.
+
+| Critério | Evidência | Status |
+|---|---|---|
+| Mapa fixo em dados, tiles 64 px, corredor, sala, obstáculos soltos, maior que 1920x1080 | src/data/testMap.ts (40x24 = 2560x1536 px; corredor de 2 tiles; sala; 7 obstáculos); tests/qa/card-005.test.ts > "area > 1920x1080, corredor, sala e 4+ obstaculos isolados"; tests/collision.test.ts > "dado do mapa consistente" | ok |
+| Nunca em tile bloqueado em 60 ticks, 8 direções | tests/qa/card-005.test.ts > "nunca entra em tile bloqueado..." (todos os tiles livres do TEST_MAP x 8 direções x 60 ticks); tests/collision.test.ts (mapa pequeno e TEST_MAP) | ok |
+| 320 px/s em espaço livre e determinismo | tests/qa/card-005.test.ts > "velocidade 320 px/s ... e determinismo"; tests/collision.test.ts > "espaco livre" e "determinismo" | ok |
+| Colisão pura, sem Phaser, tiles vêm do dado | src/sim/collision.ts lido (só importa data/sim e data/world; usa map.rows); tests/architecture.test.ts > "src/sim nao importa phaser nem render" | ok |
+| Câmera mantém Enzo no centro | SÓ POR CÓDIGO: GameScene.ts faz cameras.main.centerOn(player.x, player.y) a cada draw, sem bounds. Não rodei no navegador | ok (código; playtest) |
+| Paredes/obstáculos como formas escuras distintas do chão | SÓ POR CÓDIGO: mapView.ts usa tile-parede (Noite com contorno Folhagem) e tile-chao (Mata escura) com PALETTE. Visual não conferido | ok (código; playtest) |
+| Luz do card 003 continua sobre o mapa | Testes de luz passam (tests/light.test.ts, usa tiles bloqueados do TEST_MAP); imagens com pipeline Light2D e luz em coordenadas de mundo no código. Efeito visual não conferido | ok (código/testes; playtest) |
+
+Verificado só por código/testes: câmera, aparência do mapa e luz na tela. Nada disso foi aberto num navegador.
+
+Observação (não bloqueia, já apontada pelo revisor): tipo TileMap em src/data/testMap.ts não é usado.
+
+Roteiro de playtest para o Guilherme:
+1. Rode `npm run dev` no worktree .worktrees/005 (ou na main após o merge) e abra o jogo no navegador.
+2. Ande com WASD/setas: o Enzo deve ficar no centro da tela, o mapa deve se mover em volta, e só um círculo de luz em volta dele deve estar visível, o resto escuro.
+3. Siga o corredor (a partir do spawn, à esquerda) até a sala grande; paredes e obstáculos devem aparecer como formas escuras com contorno verde, diferentes do chão.
+4. Encoste em paredes e nos obstáculos soltos da sala, em retas e diagonais: o Enzo nunca deve atravessar; na diagonal deve deslizar pela parede. Avalie se o tamanho da caixa de colisão (pé do Enzo) e o deslize parecem bons.
+5. Vá até as bordas do mapa: o Enzo continua no centro, sem a câmera travar. Avalie se a câmera ficou legível e a luz o acompanha sem atraso.
 
 ## Historico
 - 2026-10-22 15:58 | SM | criado no backlog (Fase 2)
@@ -80,3 +102,4 @@ Estado atual do main: o Enzo vive em coordenadas relativas ao centro da tela (st
 - 2026-10-22 16:52 | SM | refinamento -> dev (arquiteto aprovou; playtest: sim); worktree .worktrees/005 criado. 006, 007 e 008 esperam para não conflitarem em step.ts
 - 2026-10-22 16:54 | SM | dev -> review (dev aprovou)
 - 2026-10-22 16:54 | SM | review -> qa (revisor aprovou)
+- 2026-10-22 16:55 | SM | qa -> playtest (qa aprovou; playtest: sim); aguarda Guilherme
