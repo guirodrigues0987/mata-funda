@@ -1,7 +1,7 @@
 ---
 id: 004
 titulo: Publicar o jogo no GitHub Pages
-coluna: qa
+coluna: done
 resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 0
 fase: 1
@@ -66,6 +66,18 @@ Fora do escopo: mudar `vite.config.ts`, domínio customizado, preview por PR/bra
 - 2026-10-22 | Arquiteto | Bloqueado: depende do card 000 (esqueleto), que ainda não está no `main` (não existem `package.json`, `src/`, `tests/` nem config de build). O plano do workflow depende dos scripts reais de `test` e `build` e do diretório de saída (`dist/`) e do `base` do Vite para evitar 404 em subcaminho do Pages. Replanejar quando o 000 estiver no `main`.
 - 2026-10-22 | Arquiteto | Plano aprovado (P). Dependência 000 já no main. Atenção: exige ativar Pages com Source = GitHub Actions e permissão `workflow` no push, ambos do Guilherme.
 - 2026-10-22 | Revisor | Passou no checklist: diff só cria deploy.yml e ajusta README, conforme as tarefas; jobs test->build->deploy, passos Testes/Build/Publicação, permissões e concurrency corretos; sem mudanças em src/ ou deps. (opcional) A verificação de 404 só foi por inspeção do dist; o QA deve conferir a URL após Pages Source = GitHub Actions.
+- 2026-10-22 | QA | resultado: aprovado (com pendências humanas). `npm install`, `npm run test -- --run` (2 arquivos, 4 testes ok) e `npm run build` passaram no worktree 004; YAML validado com PyYAML; `dist/index.html` usa `./assets/...` (relativo, sem 404 em /mata-funda/).
+
+| Critério | Evidência | Status |
+|---|---|---|
+| Push no main roda testes e depois build | deploy.yml: `on.push.branches: [main]`, job test -> build (`needs: test`) | ok |
+| Teste falho não publica, site anterior fica | `needs` encadeia test -> build -> deploy; sem teste ok, nada publica | ok (por inspeção) |
+| Testes passando publicam no Pages e jogo abre pela URL | job deploy com `actions/deploy-pages@v4`, artifact `dist` | PENDENTE HUMANO (precisa Pages Source = GitHub Actions e escopo `workflow`) |
+| URL pública no README | README.md: https://guirodrigues0987.github.io/mata-funda/ | ok |
+| Resultado por etapa visível | passos "Testes", "Build", "Publicação" em 3 jobs separados | ok |
+| Sem 404 no console | `base: "./"` em vite.config.ts e dist/index.html com caminho relativo | ok por inspeção; confirmar na URL real |
+
+Pendências do Guilherme: (1) Settings > Pages > Source = GitHub Actions; (2) credencial de push com escopo `workflow`; (3) após o primeiro push no main, conferir 3 jobs verdes e abrir a URL sem 404 no console.
 
 ## Historico
 - 2026-10-21 12:00 | SM | criado no backlog (Sprint 0)
@@ -75,3 +87,4 @@ Fora do escopo: mudar `vite.config.ts`, domínio customizado, preview por PR/bra
 - 2026-10-22 14:46 | SM | refinamento -> dev (arquiteto aprovou); worktree .worktrees/004 criado
 - 2026-10-22 14:47 | SM | dev -> review (dev aprovou)
 - 2026-10-22 14:47 | SM | review -> qa (revisor aprovou)
+- 2026-10-22 14:48 | SM | qa -> done (qa aprovado, com pendências humanas de Pages/workflow; playtest: nao)
