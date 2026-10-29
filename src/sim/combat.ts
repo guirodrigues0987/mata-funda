@@ -31,6 +31,7 @@ export function trySwing(state: GameState, command: Command): GameState {
   const ay = command.aimY ?? 0;
   const len = Math.hypot(ax, ay);
   const dir = len > 0 ? { x: ax / len, y: ay / len } : { x: p.facingX, y: p.facingY };
+  const struck = state.dummies.find((d) => inSwing(p, dir, d, w));
   const dummies = state.dummies
     .map((d) => (inSwing(p, dir, d, w) ? { ...d, hp: d.hp - w.damage } : d))
     .filter((d) => d.hp > 0);
@@ -38,6 +39,10 @@ export function trySwing(state: GameState, command: Command): GameState {
     ...state,
     dummies,
     lastSwing: { tick: state.tick, dirX: dir.x, dirY: dir.y },
+    lastHit:
+      struck === undefined
+        ? state.lastHit
+        : { tick: state.tick, targetId: struck.id, x: struck.x, y: struck.y, damage: w.damage },
     player: {
       ...p,
       facingX: dir.x,

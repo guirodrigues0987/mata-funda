@@ -41,6 +41,14 @@ export type GameState = {
   readonly dummies: readonly Dummy[];
   // So para o render desenhar o golpe
   readonly lastSwing: { readonly tick: number; readonly dirX: number; readonly dirY: number } | null;
+  // So para o render mostrar o acerto (piscar e numero); nenhuma regra le isso
+  readonly lastHit: {
+    readonly tick: number;
+    readonly targetId: string;
+    readonly x: number;
+    readonly y: number;
+    readonly damage: number;
+  } | null;
 };
 
 export type Dummy = { readonly id: string; readonly x: number; readonly y: number; readonly hp: number };

@@ -32,6 +32,7 @@ export function createInitialState(map: SpawnMap = TEST_MAP): GameState {
     },
     dummies: [{ id: "treino", x: x + TRAINING_DUMMY.offsetX, y: y + TRAINING_DUMMY.offsetY, hp: TRAINING_DUMMY.hp }],
     lastSwing: null,
+    lastHit: null,
   };
 }
 
