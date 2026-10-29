@@ -2,7 +2,7 @@
 id: 007
 titulo: Esquiva com invulnerabilidade
 coluna: done
-resultado: aprovado
+resultado: concluido
 retrabalho: 0
 fase: 2
 tipo: feature
@@ -95,3 +95,4 @@ Roteiro de playtest:
 - 2026-10-29 14:02 | SM | review -> qa; resultado pendente.
 - 2026-10-29 14:12 | SM | qa -> playtest (playtest: sim); resultado pendente, aguarda o Guilherme.
 - 2026-10-29 15:10 | SM | Guilherme aprovou o playtest ("aprovado 007", no terminal). playtest -> done; resultado pendente para o redator.
+- 2026-10-29 15:18 | SM | redator ok; merge --no-ff de card/007 no main; worktree e branch removidos; concluido.
