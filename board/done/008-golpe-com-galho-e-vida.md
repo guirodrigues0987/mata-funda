@@ -2,7 +2,7 @@
 id: 008
 titulo: Golpe com o Galho, vida e dano
 coluna: done
-resultado: pendente
+resultado: aprovado
 retrabalho: 3
 fase: 2
 tipo: feature
