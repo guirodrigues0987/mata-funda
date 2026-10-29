@@ -59,7 +59,7 @@ describe("bateria da lanterna", () => {
     expect(go(500, [10, 100, 300])).toEqual(a);
   });
   it("readCommand repassa toggleLight", () => {
-    const k = { left: false, right: false, up: false, down: false };
+    const k = { left: false, right: false, up: false, down: false, dodge: false };
     expect(readCommand({ ...k, toggleLight: true }).toggleLight).toBe(true);
     expect(readCommand({ ...k, toggleLight: false }).toggleLight).toBe(false);
   });

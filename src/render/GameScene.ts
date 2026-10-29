@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 import { PALETTE } from "../data/palette";
-import { advanceClock, createClock, createInitialState, step } from "../sim";
+import { advanceClock, createClock, createInitialState, isDodging, step } from "../sim";
 import type { Clock, GameState } from "../sim";
 import { createLightRig, updateLight } from "./lightView";
 import { createEnzoView } from "./playerView";
@@ -16,6 +16,7 @@ export class GameScene extends Phaser.Scene {
   private light!: Phaser.GameObjects.Light;
   private marker!: Phaser.GameObjects.Graphics;
   private lKey!: Phaser.Input.Keyboard.Key;
+  private spaceKey!: Phaser.Input.Keyboard.Key;
   private hud!: BatteryHud;
 
   constructor() {
@@ -27,6 +28,7 @@ export class GameScene extends Phaser.Scene {
     const kb = this.input.keyboard!;
     this.wasd = kb.addKeys("W,A,S,D") as typeof this.wasd;
     this.lKey = kb.addKey("L");
+    this.spaceKey = kb.addKey("SPACE");
     this.light = createLightRig(this);
     createMapView(this);
     this.marker = createEnzoView(this);
@@ -39,20 +41,23 @@ export class GameScene extends Phaser.Scene {
     this.clock = advanced.clock;
     // JustDown le uma vez por quadro; o pulso vai so ao primeiro tick do quadro.
     let pulse = Phaser.Input.Keyboard.JustDown(this.lKey);
+    let dodgePulse = Phaser.Input.Keyboard.JustDown(this.spaceKey);
     for (let i = 0; i < advanced.ticks; i++) {
-      this.state = step(this.state, this.command(pulse));
+      this.state = step(this.state, this.command(pulse, dodgePulse));
       pulse = false;
+      dodgePulse = false;
     }
     this.draw();
   }
 
-  private command(toggleLight: boolean) {
+  private command(toggleLight: boolean, dodge: boolean) {
     return readCommand({
       left: this.wasd.A.isDown,
       right: this.wasd.D.isDown,
       up: this.wasd.W.isDown,
       down: this.wasd.S.isDown,
       toggleLight,
+      dodge,
     });
   }
 
@@ -60,6 +65,7 @@ export class GameScene extends Phaser.Scene {
     updateLight(this.light, this.state.player, this.state.light);
     updateBatteryHud(this.hud, this.state.light);
     this.marker.setPosition(this.state.player.x, this.state.player.y);
+    this.marker.setAlpha(isDodging(this.state) ? 0.4 : 1);
     this.cameras.main.centerOn(this.state.player.x, this.state.player.y);
   }
 }
