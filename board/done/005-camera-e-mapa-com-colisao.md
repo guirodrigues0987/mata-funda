@@ -1,8 +1,8 @@
 ---
 id: 005
 titulo: Câmera que segue o Enzo e mapa com colisão
-coluna: playtest
-resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
+coluna: done
+resultado: pendente
 retrabalho: 0
 fase: 2
 tipo: feature
@@ -103,3 +103,4 @@ Roteiro de playtest para o Guilherme:
 - 2026-10-22 16:54 | SM | dev -> review (dev aprovou)
 - 2026-10-22 16:54 | SM | review -> qa (revisor aprovou)
 - 2026-10-22 16:55 | SM | qa -> playtest (qa aprovou; playtest: sim); aguarda Guilherme
+- 2026-10-29 13:05 | SM | Guilherme aprovou o playtest ("aprovado 005", via Telegram, lido pelo mensageiro). playtest -> done; resultado pendente para o redator.
