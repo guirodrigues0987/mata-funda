@@ -1,7 +1,7 @@
 ---
 id: 008
 titulo: Golpe com o Galho, vida e dano
-coluna: dev
+coluna: review
 resultado: pendente
 retrabalho: 2
 fase: 2
@@ -85,6 +85,10 @@ Retrabalho 1 (playtest reprovado: alvo nao aparecia, golpe nao saia):
 - Teste novo tests/visibility.test.ts (alvo em chao, dentro do raio de luz, ordem das camadas). 95 testes ok, build ok.
 - Verificado so por codigo/testes (nao jogado): que o alvo e o arco agora aparecem de fato, e que o clique esquerdo chega ao jogo (pointerdown/worldX); se ainda falhar no playtest, a suspeita seguinte e a entrada do mouse.
 
+- Retrabalho 2: (1) clique perdido em quadros sem tick: nova funcao pura consumeClick em src/render/clickPulse.ts; GameScene.update so zera o clique quando advanced.ticks > 0. (2) removido expect(LIGHT).toBeDefined() e o import em tests/visibility.test.ts. (3) mira via camera.getWorldPoint(ptr.x, ptr.y); cores, tamanhos, 0,1 s do arco e dano 3 da tecla K movidos para COMBAT_VIEW em src/data/combat.ts. Teste novo tests/clickPulse.test.ts (quadro sem tick mantem, com tick consome, fluxo clique->readCommand->step->dano no alvo). 99 testes ok, build ok.
+- Fluxo conferido por codigo: pointerdown -> clicked -> consumeClick -> attack no 1o tick -> readCommand(aimX/aimY) -> step -> trySwing -> dano/lastSwing -> drawCombat.
+- Verificado so por codigo/testes (nao jogado): que o clique do mouse chega de fato ao jogo, getWorldPoint correto com a camera centrada, e o desenho do arco/alvo na tela.
+
 ## Comentarios
 - 2026-10-22 | PO | A bíblia só define o Galho por "intervalo" de 0,4 s; não há duração de animação nem tempo de recuperação separados, então usei só o intervalo e não inventei outros números. A vida do alvo de treino também não está na bíblia: é valor de teste, escolhido na implementação (sugestão para quem refinar: múltiplo de 2). Obs. para o SM: o card é de fase 2 e a fase atual no documento ainda é 1.
 - 2026-10-22 | Arquiteto | Plano pronto, estimativa M. Mudei playtest de nao para sim: o card e combate e define a sensacao do golpe (alcance, arco, ritmo de 0,4 s, piscar da invulnerabilidade). Vida do alvo de treino definida em 6 (3 golpes). Command ganha campos opcionais para reduzir conflito com os cards 005 e 007, que tambem mexem em Command/GameState; quem entrar depois resolve o merge.
@@ -122,3 +126,4 @@ Roteiro de playtest:
 - 2026-10-29 16:05 | SM | Guilherme reprovou o playtest (no terminal): "a parte da vida até desmaiar funcionou ok, mas não apareceu nenhum monstro nem consegui atirar". Ou seja: tecla K, vida, invulnerabilidade e desmaio ok; alvo de treino não aparece e o golpe (clique esquerdo) não sai. playtest -> dev; retrabalho 1; resultado pendente.
 - 2026-10-29 16:20 | SM | dev -> review (retrabalho 1); resultado pendente.
 - 2026-10-29 16:30 | SM | revisor reprovou (clique perdido em quadros sem tick em GameScene.update; teste visibility com expect inútil; comentários no card). review -> dev; retrabalho 2; resultado pendente. Atenção: no retrabalho 3 o card é bloqueado.
+- 2026-10-29 16:45 | SM | dev -> review (retrabalho 2); resultado pendente.
