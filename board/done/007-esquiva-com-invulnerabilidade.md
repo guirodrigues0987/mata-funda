@@ -1,8 +1,8 @@
 ---
 id: 007
 titulo: Esquiva com invulnerabilidade
-coluna: playtest
-resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
+coluna: done
+resultado: pendente
 retrabalho: 0
 fase: 2
 tipo: feature
@@ -94,3 +94,4 @@ Roteiro de playtest:
 - 2026-10-29 13:55 | SM | dev -> review; resultado pendente.
 - 2026-10-29 14:02 | SM | review -> qa; resultado pendente.
 - 2026-10-29 14:12 | SM | qa -> playtest (playtest: sim); resultado pendente, aguarda o Guilherme.
+- 2026-10-29 15:10 | SM | Guilherme aprovou o playtest ("aprovado 007", no terminal). playtest -> done; resultado pendente para o redator.
