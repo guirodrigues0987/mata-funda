@@ -1,7 +1,7 @@
 ---
 id: 008
 titulo: Golpe com o Galho, vida e dano
-coluna: dev
+coluna: review
 resultado: pendente
 retrabalho: 3
 fase: 2
@@ -111,6 +111,12 @@ Retrabalho 1 (playtest reprovado: alvo nao aparecia, golpe nao saia):
 - Retrabalho 2: (1) clique perdido em quadros sem tick: nova funcao pura consumeClick em src/render/clickPulse.ts; GameScene.update so zera o clique quando advanced.ticks > 0. (2) removido expect(LIGHT).toBeDefined() e o import em tests/visibility.test.ts. (3) mira via camera.getWorldPoint(ptr.x, ptr.y); cores, tamanhos, 0,1 s do arco e dano 3 da tecla K movidos para COMBAT_VIEW em src/data/combat.ts. Teste novo tests/clickPulse.test.ts (quadro sem tick mantem, com tick consome, fluxo clique->readCommand->step->dano no alvo). 99 testes ok, build ok.
 - Fluxo conferido por codigo: pointerdown -> clicked -> consumeClick -> attack no 1o tick -> readCommand(aimX/aimY) -> step -> trySwing -> dano/lastSwing -> drawCombat.
 - Verificado so por codigo/testes (nao jogado): que o clique do mouse chega de fato ao jogo, getWorldPoint correto com a camera centrada, e o desenho do arco/alvo na tela.
+ 
+Retrabalho 4 (feedback de acerto, passo 7):
+- Sim: `lastHit` em GameState (null no inicio), gravado em `trySwing` so quando ha acerto (dano vem de WEAPONS.galho); erro, cooldown, fainted e attack ausente nao mexem nele; `lastSwing` segue sendo gravado (arco aparece no erro). Valores em COMBAT_VIEW (src/data/combat.ts): piscar amarelo 0xffee55 por 0,15 s (alvo normal e vermelho 0xaa4444), numero amarelo com contorno preto, 48 px, sobe 40 px em 0,6 s; barra verde 64x10 px sobre fundo vermelho escuro acima do alvo, mais texto "4/6" (22 px). Max da barra vem de TRAINING_DUMMY.hp.
+- Render: funcao pura `hitFeedbackView(state)` em src/render/hitFeedback.ts (testada) e GameScene.drawCombat so desenha o resultado (Text reaproveitado para numero e para vida). Fluxo conferido: clique -> consumeClick -> attack -> step -> trySwing -> lastHit -> hitFeedbackView -> drawCombat.
+- Testes: tests/hitFeedback.test.ts (14 casos: acerto, 3 tipos de erro, acerto+erro, dois acertos, golpe fatal, cooldown/fainted/attack false, dados, e a view). 16 arquivos, 120 testes ok; build ok.
+- Verificado so por codigo (nao jogado): cores/tamanho do numero e da barra legiveis na tela, posicao do numero e da barra acima do alvo, ordem de camadas dos Text novos (depth combate+1), numero subindo. Isso so da para confirmar jogando.
 
 ## Comentarios
 - 2026-10-29 | Arquiteto | Retrabalho 4 (feedback de acerto): acrescentado o passo 7 (lastHit na simulacao, dados de feedback, desenho no GameScene, testes de acerto/erro); antigo passo 7 virou 8; fora do escopo ajustado. Estimativa M, playtest sim. resultado: aprovado.
@@ -171,3 +177,4 @@ Roteiro de playtest (o servidor de dev já roda no worktree; RECARREGUE a págin
 - 2026-10-29 17:20 | SM | Guilherme reprovou o playtest (no terminal): "reprovado 008: está aparecendo o arco quando eu clico, mas não aparece se eu dou dano ou o projétil. Eu tenho que encostar o arco no inimigo para poder dar dano nele". Retrabalho chegou a 3: card BLOQUEADO (fica em playtest/, não volta para dev). Pontos: (1) falta feedback visível de acerto/dano no alvo; (2) o alcance do Galho é 1 tile, arco 90° (bíblia 5.2, corpo a corpo, sem projétil; o projétil é do Estilingue, fora do escopo do card). Aguarda decisão do Guilherme sobre o que ele espera do golpe.
 - 2026-10-29 17:25 | SM | Guilherme decidiu (no terminal) destravar o card com "só feedback de acerto": manter Galho corpo a corpo, 1 tile, arco 90° (bíblia 5.2) e acrescentar feedback visível quando o golpe acerta (alvo pisca, número do dano, barra de vida do alvo). Retrabalho continua 3 (registro), bloqueio levantado por decisão do Guilherme. playtest -> dev; resultado pendente. Antes do dev: PO acrescenta o critério e o arquiteto as tarefas.
 - 2026-10-29 17:40 | SM | PO acrescentou 3 critérios de feedback de acerto; arquiteto acrescentou as tarefas (passo 7). Card segue em dev, retrabalho 3, resultado pendente; aciona o dev.
+- 2026-10-29 17:55 | SM | dev -> review (feedback de acerto); resultado pendente.
