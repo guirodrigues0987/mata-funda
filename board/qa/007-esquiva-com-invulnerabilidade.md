@@ -1,7 +1,7 @@
 ---
 id: 007
 titulo: Esquiva com invulnerabilidade
-coluna: review
+coluna: qa
 resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 0
 fase: 2
@@ -68,6 +68,7 @@ Fora do escopo: esquiva dupla, bloqueio em agua rasa, esquiva perfeita, invulner
 ## Comentarios
 - 2026-10-22 | PO | Fora do escopo por ainda não valer nesta fase/card: Esquiva dupla (habilidade da árvore), proibição de esquivar em água rasa (Igapó), esquiva perfeita e a invulnerabilidade de 1 s após levar dano. A bíblia não define o que acontece ao apertar Espaço com o Enzo parado, nem se os 0,8 s contam do início ou do fim do rolamento; por isso os critérios cobrem só esquiva em movimento e falam em "depois de uma esquiva". Se o Guilherme quiser definir esses casos, vale registrar na bíblia antes. Atenção: o card é fase 2 e a fase atual no documento de fases ainda é 1 (decisão do SM).
 - 2026-10-22 | Arquiteto | Plano pronto, estimativa P. playtest alterado de nao para sim (movimento/esquiva: sensacao do rolamento). Decisoes a confirmar com o Guilherme: Espaco parado e ignorado; 0,8 s contado do inicio do rolamento. Atencao: 008 tambem mexe em GameState/types (hp); este card cria `player.hp` e `PLAYER.maxHp`, o 008 deve reaproveitar (possivel conflito de merge trivial).
+- 2026-10-29 | Revisor | Passou no checklist: escopo, valores da bíblia (3 tiles, 0,25 s, 0,8 s, Espaço) vindos de src/data, sim sem Phaser, sem aleatoriedade, 78 testes passando cobrindo distância, duração, invulnerabilidade e intervalo. (opcional) tests/dodge.test.ts: `let hp` reatribuído sem necessidade e comentário confuso no teste de invulnerabilidade.
 
 ## Historico
 - 2026-10-22 15:58 | SM | criado no backlog (Fase 2)
@@ -75,3 +76,4 @@ Fora do escopo: esquiva dupla, bloqueio em agua rasa, esquiva perfeita, invulner
 - 2026-10-22 16:51 | SM | backlog -> refinamento (PO aprovou; Fase atual agora é 2)
 - 2026-10-29 13:47 | SM | refinamento -> dev; worktree .worktrees/007 (branch card/007); resultado pendente. 006 mergeado.
 - 2026-10-29 13:55 | SM | dev -> review; resultado pendente.
+- 2026-10-29 14:02 | SM | review -> qa; resultado pendente.
