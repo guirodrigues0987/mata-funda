@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest";
 import { consumeClick } from "../src/render/clickPulse";
 import { readCommand } from "../src/render/readCommand";
 import { createInitialState, step } from "../src/sim";
+import type { GameState } from "../src/sim";
 
 describe("clique pendente", () => {
   it("quadro sem tick mantem o clique", () => {
@@ -18,7 +19,7 @@ describe("clique pendente", () => {
   it("fluxo: clique em quadro sem tick, golpe acontece no quadro seguinte e fere o alvo", () => {
     let pending = true;
     const base = createInitialState();
-    let s = { ...base, dummies: [{ ...base.dummies[0], x: base.player.x + 48, y: base.player.y }] };
+    let s: GameState = { ...base, dummies: [{ ...base.dummies[0], x: base.player.x + 48, y: base.player.y }] };
     const hp0 = s.dummies[0].hp;
     const frames = [0, 0, 1];
     for (const ticks of frames) {
