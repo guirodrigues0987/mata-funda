@@ -1,7 +1,7 @@
 ---
 id: 007
 titulo: Esquiva com invulnerabilidade
-coluna: qa
+coluna: playtest
 resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 0
 fase: 2
@@ -69,6 +69,22 @@ Fora do escopo: esquiva dupla, bloqueio em agua rasa, esquiva perfeita, invulner
 - 2026-10-22 | PO | Fora do escopo por ainda não valer nesta fase/card: Esquiva dupla (habilidade da árvore), proibição de esquivar em água rasa (Igapó), esquiva perfeita e a invulnerabilidade de 1 s após levar dano. A bíblia não define o que acontece ao apertar Espaço com o Enzo parado, nem se os 0,8 s contam do início ou do fim do rolamento; por isso os critérios cobrem só esquiva em movimento e falam em "depois de uma esquiva". Se o Guilherme quiser definir esses casos, vale registrar na bíblia antes. Atenção: o card é fase 2 e a fase atual no documento de fases ainda é 1 (decisão do SM).
 - 2026-10-22 | Arquiteto | Plano pronto, estimativa P. playtest alterado de nao para sim (movimento/esquiva: sensacao do rolamento). Decisoes a confirmar com o Guilherme: Espaco parado e ignorado; 0,8 s contado do inicio do rolamento. Atencao: 008 tambem mexe em GameState/types (hp); este card cria `player.hp` e `PLAYER.maxHp`, o 008 deve reaproveitar (possivel conflito de merge trivial).
 - 2026-10-29 | Revisor | Passou no checklist: escopo, valores da bíblia (3 tiles, 0,25 s, 0,8 s, Espaço) vindos de src/data, sim sem Phaser, sem aleatoriedade, 78 testes passando cobrindo distância, duração, invulnerabilidade e intervalo. (opcional) tests/dodge.test.ts: `let hp` reatribuído sem necessidade e comentário confuso no teste de invulnerabilidade.
+- 2026-10-29 | QA | resultado: aprovado. Suíte completa (81 testes, 11 arquivos) e build OK.
+
+| Critério | Evidência | Status |
+|---|---|---|
+| Espaço em movimento rola 3 tiles em 0,25 s | tests/dodge.test.ts > "3 tiles em exatamente 15 ticks..."; tests/qa/card-007.test.ts > "rola 3 tiles para cima em 15 ticks"; GameScene registra SPACE (JustDown) | ok |
+| Invulnerável durante o rolamento | tests/dodge.test.ts > "invulneravel nos ticks 0..14..." e "...alvo no caminho"; QA > "hazard sobre o Enzo..." | ok |
+| Dano normal antes e depois | mesmos testes (antes de rolar e a partir do tick 15) | ok |
+| Recarga 0,8 s (47 não, 48 sim) | tests/dodge.test.ts > "intervalo: tick 47 nao inicia, tick 48 inicia"; QA > "recarga..." | ok |
+| Cobertura por testes de simulação sem tela | tests/dodge.test.ts (via run/step), arquitetura passando | ok |
+
+Roteiro de playtest:
+1. Abra o jogo e ande com WASD; aperte Espaço: o Enzo deve rolar rápido na direção do movimento (cerca de 3 tiles) e o marcador ficar semitransparente.
+2. Aperte Espaço parado: nada deve acontecer.
+3. Aperte Espaço várias vezes seguidas: só rola de novo depois de cerca de 0,8 s.
+4. Teste na diagonal e segurando a tecla: deve rolar uma vez só, sem repetir sozinho.
+5. Avalie a sensação: distância e velocidade do rolamento estão boas?
 
 ## Historico
 - 2026-10-22 15:58 | SM | criado no backlog (Fase 2)
@@ -77,3 +93,4 @@ Fora do escopo: esquiva dupla, bloqueio em agua rasa, esquiva perfeita, invulner
 - 2026-10-29 13:47 | SM | refinamento -> dev; worktree .worktrees/007 (branch card/007); resultado pendente. 006 mergeado.
 - 2026-10-29 13:55 | SM | dev -> review; resultado pendente.
 - 2026-10-29 14:02 | SM | review -> qa; resultado pendente.
+- 2026-10-29 14:12 | SM | qa -> playtest (playtest: sim); resultado pendente, aguarda o Guilherme.
