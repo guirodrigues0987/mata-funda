@@ -1,7 +1,7 @@
 ---
 id: 008
 titulo: Golpe com o Galho, vida e dano
-coluna: qa
+coluna: playtest
 resultado: pendente
 retrabalho: 2
 fase: 2
@@ -107,14 +107,28 @@ Retrabalho 1 (playtest reprovado: alvo nao aparecia, golpe nao saia):
 | Valores em src/data | "valores vem de src/data"; src/sim/combat.ts le WEAPONS/ENZO_COMBAT | ok |
 | Sem outras armas/criaturas/dano por contato | revisão do diff: só Galho e dummy; damagePlayer sem chamadores além do teste e da tecla K | ok |
 
-Obs.: clique/mira no mouse, desenho e piscar só verificados por leitura de código; conferir no playtest.
+- 2026-10-29 | QA | Retrabalho 2: resultado: aprovado. Suite completa 15 arquivos, 106 testes ok; build ok (so aviso de chunk grande). Novo: tests/qa/card-008.test.ts (commit ec2a260 em card/008).
 
-Roteiro de playtest:
-1. Abra o jogo; o alvo de treino fica 3 tiles à direita do Enzo. Aproxime-se até ~1 tile.
-2. Clique esquerdo mirando no alvo: o arco aparece e cada golpe tira 2 de vida; no 3º golpe ele some. Tente mirar para o lado/longe: não deve acertar.
-3. Clique rápido (spam): só deve golpear a cada ~0,4 s.
+| Critério | Evidência | Status |
+|---|---|---|
+| Golpe na direção do mouse, 1 tile, arco 90° | tests/combat.test.ts > "acerta a 1 tile", "nao acerta a 1,5 tile", "nao acerta alvo atras", "arco: 40 graus acerta, 50 nao", "aim para baixo..." | ok |
+| 2 de dano, intervalo 0,4 s | tests/combat.test.ts > "cooldown: 23 ticks um golpe, 24 ticks dois" | ok |
+| Alvo de treino com vida em src/data, removido em 0 | tests/combat.test.ts > "tres golpes removem o alvo" | ok |
+| Vida 10, dano, 1 s invulnerável, dano ignorado | tests/combat.test.ts > "dano, invulnerabilidade de 60 ticks e novo dano" | ok |
+| Vida 0 = desmaio, nunca negativa | tests/combat.test.ts > "vida nunca negativa, desmaia e nao golpeia" | ok |
+| Valores em src/data | tests/combat.test.ts > "valores vem de src/data" | ok |
+| Sem outras armas/criaturas/dano por contato | revisão do diff | ok |
+| Correção do playtest: clique com quadros sem tick | tests/qa/card-008.test.ts > "monitor 144 Hz...", "240 Hz...", "sem fila de golpes", "caminho completo fere o alvo" (clock real + consumeClick + readCommand + step) | ok |
+| Correção do playtest: ordem das camadas | tests/qa/card-008.test.ts > "mapa < combate < Enzo < HUD", "GameScene aplica as camadas" (confere o código-fonte) | ok |
+
+Limite: o desenho real (Phaser) e o mouse não rodam em teste; as camadas foram checadas por leitura do código-fonte de GameScene. Confirmar no playtest.
+
+Roteiro de playtest (o servidor de dev já roda no worktree; RECARREGUE a página, Ctrl+F5, antes de jogar):
+1. Abra o jogo e recarregue. Deve aparecer um retângulo (alvo de treino) 3 tiles à direita do Enzo e o texto "Vida 10/10" no canto.
+2. Ande até ~1 tile do alvo, clique esquerdo mirando nele: deve aparecer um arco rápido (~0,1 s) e o alvo perder vida; no 3º golpe ele some. Mire para o lado oposto ou fique a mais de 1 tile: não deve acertar.
+3. Faça spam de cliques: só deve golpear a cada ~0,4 s. Se tiver monitor de 120/144 Hz, confirme que nenhum clique "some".
 4. Aperte K: vida cai 3 e o Enzo pisca por 1 s; K de novo durante o piscar não tira vida.
-5. Aperte K até a vida zerar (texto de vida no canto): vida para em 0 e o Enzo não consegue mais golpear.
+5. Aperte K até zerar: a vida para em 0 ("DESMAIOU") e o clique não golpeia mais.
 
 ## Historico
 - 2026-10-22 15:58 | SM | criado no backlog (Fase 2)
@@ -129,3 +143,4 @@ Roteiro de playtest:
 - 2026-10-29 16:30 | SM | revisor reprovou (clique perdido em quadros sem tick em GameScene.update; teste visibility com expect inútil; comentários no card). review -> dev; retrabalho 2; resultado pendente. Atenção: no retrabalho 3 o card é bloqueado.
 - 2026-10-29 16:45 | SM | dev -> review (retrabalho 2); resultado pendente.
 - 2026-10-29 16:52 | SM | review -> qa (retrabalho 2); resultado pendente.
+- 2026-10-29 17:00 | SM | qa -> playtest (retrabalho 2, playtest: sim); resultado pendente, aguarda o Guilherme.
