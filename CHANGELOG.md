@@ -13,6 +13,7 @@ Tudo que muda no jogo, escrito pelo agente Redator a cada card concluído.
 - A câmera agora acompanha o Enzo, que fica sempre no centro da tela, por um mapa de teste maior que a tela, com corredor, sala, paredes e obstáculos soltos. Paredes e obstáculos aparecem como formas escuras e o Enzo não consegue atravessá-los; na diagonal, ele desliza pela parede. A luz em volta dele continua acompanhando. (card 005)
 - A lanterna do celular agora tem bateria: começa com 100% e gasta carga enquanto está acesa, esgotando em 2 min 30 s. A tecla L liga e desliga a luz (com meio segundo de intervalo entre um aperto e outro), e com a luz desligada ou a carga zerada o Enzo enxerga só 1,5 tile à volta. Um indicador de bateria com a porcentagem fica sempre visível no canto da tela. (card 006)
 - O Enzo agora pode esquivar com a tecla Espaço enquanto anda: rola 3 tiles em um quarto de segundo, ficando invulnerável durante o rolamento, e só pode esquivar de novo depois de 0,8 s. Espaço com o Enzo parado não faz nada. (card 007)
+- O Enzo agora ataca com o Galho: o clique esquerdo dá um golpe corpo a corpo na direção do mouse, com alcance de 1 tile e a cada 0,4 s, que causa 2 de dano. Um alvo de treino mostra a vida (como 4/6), pisca em amarelo e exibe o número do dano quando é acertado, e some ao chegar a zero. O Enzo agora tem 10 de vida, fica 1 s invulnerável piscando depois de levar dano e desmaia ao chegar a zero. (card 008)
 
 ### Alterado
 - As setas do teclado não movem mais o Enzo; o movimento é só com WASD. (card 002)

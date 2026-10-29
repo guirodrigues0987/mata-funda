@@ -59,3 +59,10 @@ Quem fez: PO → Arquiteto → Dev (Claude) → Revisor → QA → Playtest (Gui
 Retrabalhos: 0
 O que mudou no jogo: o Enzo ganhou a esquiva: com Espaço ele rola 3 tiles em 0,25 s, sem levar dano durante o rolamento, e precisa esperar 0,8 s para rolar de novo.
 Curiosidade: a bíblia não dizia o que fazer com Espaço parado nem de quando contar os 0,8 s. O Arquiteto decidiu: parado não faz nada, e a recarga conta do início do rolamento. Como ainda não há inimigos, um alvo de teste que causa dano provou a invulnerabilidade, e o card passou por todo o quadro sem retrabalho.
+
+
+### 2026-10-29 — Card 008: Golpe com o Galho, vida e dano
+Quem fez: PO → Arquiteto → Dev (Claude) → Revisor → QA → Playtest (Guilherme)
+Retrabalhos: 3 (1: alvo e arco eram desenhados por baixo do mapa, por ordem de camadas; 2: cliques se perdiam em quadros sem tick de simulação, comum em monitores de 120/144 Hz; 3: o golpe saía mas não dava nenhum sinal de acerto)
+O que mudou no jogo: o Enzo ganhou o Galho, com golpe corpo a corpo na direção do mouse (1 tile, 2 de dano, a cada 0,4 s), vida 10 com 1 s de invulnerabilidade e desmaio, e um alvo de treino que pisca, mostra o número do dano e a barra de vida.
+Curiosidade: no primeiro playtest o Guilherme não via o alvo nem o golpe: o código funcionava, mas o mapa era desenhado por cima de tudo. Na terceira reprovação ele achou que o golpe era "um arco que precisa encostar no inimigo" e perguntou do projétil, que na bíblia é do Estilingue. Ele decidiu manter o Galho corpo a corpo e só acrescentar feedback visível de acerto, e o card foi aprovado no playtest seguinte.
