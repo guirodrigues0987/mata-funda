@@ -1,7 +1,7 @@
 ---
 id: 008
 titulo: Golpe com o Galho, vida e dano
-coluna: review
+coluna: qa
 resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 0
 fase: 2
@@ -83,6 +83,7 @@ Contexto do main: `Command` so tem `moveX/moveY`; `GameState` so tem `tick` e `p
 ## Comentarios
 - 2026-10-22 | PO | A bíblia só define o Galho por "intervalo" de 0,4 s; não há duração de animação nem tempo de recuperação separados, então usei só o intervalo e não inventei outros números. A vida do alvo de treino também não está na bíblia: é valor de teste, escolhido na implementação (sugestão para quem refinar: múltiplo de 2). Obs. para o SM: o card é de fase 2 e a fase atual no documento ainda é 1.
 - 2026-10-22 | Arquiteto | Plano pronto, estimativa M. Mudei playtest de nao para sim: o card e combate e define a sensacao do golpe (alcance, arco, ritmo de 0,4 s, piscar da invulnerabilidade). Vida do alvo de treino definida em 6 (3 golpes). Command ganha campos opcionais para reduzir conflito com os cards 005 e 007, que tambem mexem em Command/GameState; quem entrar depois resolve o merge.
+- 2026-10-29 | Revisor | Passou no checklist. Mover damagePlayer de damage.ts para combat.ts esta dentro do escopo (tarefa 3 pede damagePlayer em combat.ts; damage.ts so reimporta, esquiva e touchHazard preservados) e a tecla K temporaria esta prevista na tarefa 5. Testes (93) e build ok. (opcional) dano 3 da tecla K e 0,1 s do arco estao fixos em GameScene; mover para src/data. (opcional) offset do alvo de treino relativo ao spawn e desvio justificado da tarefa 1.
 
 ## Historico
 - 2026-10-22 15:58 | SM | criado no backlog (Fase 2)
@@ -90,3 +91,4 @@ Contexto do main: `Command` so tem `moveX/moveY`; `GameState` so tem `tick` e `p
 - 2026-10-22 16:51 | SM | backlog -> refinamento (PO aprovou; Fase atual agora é 2)
 - 2026-10-29 15:19 | SM | refinamento -> dev; worktree .worktrees/008 (branch card/008); resultado pendente. 007 mergeado.
 - 2026-10-29 15:40 | SM | dev -> review; resultado pendente.
+- 2026-10-29 15:45 | SM | review -> qa; resultado pendente.
