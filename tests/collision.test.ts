@@ -34,7 +34,7 @@ describe("colisao", () => {
   it.each(DIRS.map((d) => [`${d.moveX},${d.moveY}`, d] as const))("TEST_MAP: spawn e junto a obstaculo (%s)", (_n, cmd) => {
     never(TEST_MAP, createInitialState(), cmd);
     // obstaculo solto da sala em col 20, row 6: ponto logo ao lado dele
-    const near: GameState = { tick: 0, player: { x: 20 * T - HW - 1, y: 6.5 * T } };
+    const near: GameState = { ...createInitialState(), player: { x: 20 * T - HW - 1, y: 6.5 * T } };
     expect(boxOverlapsBlocked(TEST_MAP, near.player.x, near.player.y, HW, HH)).toBe(false);
     never(TEST_MAP, near, cmd);
   });

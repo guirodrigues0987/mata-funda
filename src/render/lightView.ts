@@ -1,6 +1,7 @@
 import type Phaser from "phaser";
 import { LIGHT } from "../data/light";
-import { hexToNumber, lightRadiusPx } from "../sim";
+import { currentLightRadiusPx, hexToNumber, lightRadiusPx } from "../sim";
+import type { LightState } from "../sim";
 
 export function createLightRig(scene: Phaser.Scene): Phaser.GameObjects.Light {
   scene.lights.enable();
@@ -14,6 +15,11 @@ export function createLightRig(scene: Phaser.Scene): Phaser.GameObjects.Light {
   );
 }
 
-export function updateLight(light: Phaser.GameObjects.Light, player: { x: number; y: number }): void {
+export function updateLight(
+  light: Phaser.GameObjects.Light,
+  player: { x: number; y: number },
+  state: LightState,
+): void {
   light.setPosition(player.x, player.y);
+  light.setRadius(currentLightRadiusPx(state));
 }
