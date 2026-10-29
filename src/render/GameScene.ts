@@ -1,6 +1,7 @@
 import Phaser from "phaser";
 import { PALETTE } from "../data/palette";
 import { ENZO_COMBAT, WEAPONS } from "../data/combat";
+import { RENDER } from "../data/render";
 import { SIM } from "../data/sim";
 import { WORLD } from "../data/world";
 import { advanceClock, damagePlayer, createClock, createInitialState, isDodging, step } from "../sim";
@@ -40,12 +41,12 @@ export class GameScene extends Phaser.Scene {
     this.input.on("pointerdown", (p: Phaser.Input.Pointer) => {
       if (p.leftButtonDown()) this.clicked = true;
     });
-    this.combatGfx = this.add.graphics();
+    this.combatGfx = this.add.graphics().setDepth(RENDER.depth.combat);
     this.hpText = this.add.text(24, 64, "", { fontFamily: "monospace", fontSize: "28px", color: "#ffffff" });
     this.hpText.setScrollFactor(0).setDepth(1000);
     this.light = createLightRig(this);
-    createMapView(this);
-    this.marker = createEnzoView(this);
+    createMapView(this).forEach((t) => t.setDepth(RENDER.depth.map));
+    this.marker = createEnzoView(this).setDepth(RENDER.depth.enzo);
     this.hud = createBatteryHud(this);
     this.draw();
   }
