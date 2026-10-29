@@ -1,7 +1,7 @@
 ---
 id: 009
 titulo: Vagalume-fumaça com telegrafia
-coluna: qa
+coluna: playtest
 resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 0
 fase: 2
@@ -87,6 +87,23 @@ Base no main: `step()` em `src/sim/step.ts` (move Enzo, depois `trySwing`), `dam
 - 2026-10-22 | PO | Soltar brasas coletáveis (moeda) depende da progressão de brasas, que não faz parte dos cards 005, 007 e 008; aqui só vale o efeito visual de fumaça e brasas. Depende dos cards 005, 007 e 008.
 - 2026-10-29 | Arquiteto | Plano pronto, estimativa M. Playtest alterado para `sim` (criatura/combate). Valores nao vindos da biblia (intervalo de mudanca de direcao do vagar, raio de contato, tamanho) ficam em `src/data/creatures.ts` como valores de teste para o Guilherme ajustar no playtest.
 - 2026-10-29 | Revisor | Aprovado: passou no checklist. Ordem em step() correta (Enzo, golpe, criaturas, contato); RNG por seed sem Math.random/Date.now; colisao via moveWithCollision; raio estrito (<3 tiles); contato reaproveita damagePlayer; circulo e fumaca/brasas no grafico de combate (depth 10, acima do mapa 0); sem telegrafia nem brasas coletaveis; 138 testes passam. (opcional) src/sim/step.ts: imports de ./collision duplicados e fora de ordem (linhas 7-11). (opcional) GameScene.ts: o 0.5 do achatamento vertical da fumaca poderia ir para COMBAT_VIEW. (opcional) hitFeedback.ts: linha do flashTargetId muito longa. (opcional) teste de colisao com parede entre criatura e Enzo nao garante modo chase; considerar forcar Enzo perto.
+- 2026-10-29 | QA | resultado: aprovado. Suíte completa 142 testes passam (138 + 4 de QA), build ok.
+
+| Critério | Evidência | Status |
+|---|---|---|
+| 1 vida, 1 dano, 2 tiles/s | tests/creatures.test.ts > "dados batem com a biblia"; "velocidade em wander: 2 tiles em 60 ticks" | ok |
+| Vaga a 3+ tiles sem ir direto ao Enzo | tests/creatures.test.ts > "vaga sem ir direto ao Enzo" | ok |
+| Persegue a <3 tiles, volta a vagar a >=3 | tests/creatures.test.ts > "persegue a 2,9 tiles a 2 tiles/s", "limite do raio" | ok |
+| Contato tira 1 de vida, 1 s invulnerável; sem dano rolando | tests/creatures.test.ts > "contato tira 1 de vida..."; tests/qa/card-009.test.ts > "contato durante invulnerabilidade...", "esquiva com criatura em cima..." | ok |
+| Golpe (dano 2) derrota, some do mapa, fumaça/brasas sem corpo; sem dano no mesmo tick | tests/creatures.test.ts > "golpe derrota o vagalume"; tests/qa/card-009.test.ts > "criatura morta no golpe nao causa dano no mesmo tick". Visual de fumaça/brasas: só no playtest | ok |
+| Não atravessa paredes | tests/creatures.test.ts > "nunca entra em parede"; tests/qa/card-009.test.ts > "parede entre criatura e Enzo: esta em chase e nunca entra na parede" (garante chase nos 600 ticks) | ok |
+
+Roteiro de playtest (Guilherme): acesso por túnel SSH em http://localhost:5173/ (recarregue com Ctrl+F5).
+1. Abra o jogo e vá à sala grande: o Vagalume tem 3 pontos de nascimento ali. Fique a mais de 3 tiles e veja se ele vaga mudando de direção.
+2. Chegue a menos de 3 tiles: ele deve perseguir; afaste-se e veja se volta a vagar. Veja se a velocidade parece justa.
+3. Deixe ele encostar: perde 1 de vida, Enzo pisca 1 s sem levar dano repetido. Depois encoste e role (esquiva) no último instante: não deve tirar vida durante o rolamento.
+4. Acerte um golpe: ele some em fumaça cinza e brasas laranja, sem sangue nem corpo.
+5. Confirme que a tecla K e o alvo de treino continuam funcionando. Valores de teste a ajustar se incomodarem: raio de contato, intervalo de vagar, tamanho (src/data/creatures.ts).
 
 ## Historico
 - 2026-10-22 15:58 | SM | criado no backlog (Fase 2)
@@ -95,3 +112,4 @@ Base no main: `step()` em `src/sim/step.ts` (move Enzo, depois `trySwing`), `dam
 - 2026-10-29 19:00 | SM | refinamento -> dev; worktree .worktrees/009 (branch card/009); resultado pendente. Arquiteto mudou playtest para sim. Título menciona telegrafia mas o escopo não tem (bíblia sec. 9): ver comentário do arquiteto.
 - 2026-10-29 19:20 | SM | dev -> review; resultado pendente.
 - 2026-10-29 19:30 | SM | review -> qa; resultado pendente.
+- 2026-10-29 19:40 | SM | qa -> playtest (playtest: sim); resultado pendente, aguarda o Guilherme.
