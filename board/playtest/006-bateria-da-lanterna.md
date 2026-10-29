@@ -1,7 +1,7 @@
 ---
 id: 006
 titulo: Bateria da lanterna
-coluna: qa
+coluna: playtest
 resultado: pendente
 retrabalho: 0
 fase: 2
@@ -87,6 +87,25 @@ Fora do escopo (nao fazer):
 - 2026-10-22 | Arquiteto | Plano pronto, estimativa M. playtest: sim (mexe em luz, sensação de jogo; PO tinha deixado nao). Decisões fixadas: carga em ticks inteiros (9000), % com ceil, L como pulso por aperto, intervalo de 30 ticks só conta após toggle efetivo, comando toggleLight opcional para não quebrar testes atuais.
 
 - 2026-10-29 | Revisor | Aprovado: passou em todo o checklist (escopo, bíblia, separação sim/render, dados, determinismo, testes 64 ok, sem dependência nova). (opcional) strokeThickness: 4 em src/render/hudView.ts poderia ir para RENDER.hud.
+- 2026-10-29 | QA | resultado: aprovado. npm install, npm run test (9 arquivos, 64 testes) e npm run build ok (so aviso de tamanho de chunk).
+
+| Critério | Evidência | Status |
+|---|---|---|
+| Começa ligada, 100%, raio 4 tiles | tests/battery.test.ts > "estado inicial: ligada, 100%, raio 4 tiles" | ok |
+| 100% a 0% em 150 s; sem gasto desligada | tests/battery.test.ts > "gasta 150 s (9000 ticks) ligada" e "sem gasto com a luz desligada" | ok |
+| L liga/desliga; segundo aperto em menos de 0,5 s ignorado | tests/battery.test.ts > "intervalo de 0,5 s entre toques"; GameScene usa JustDown (um pulso por aperto, so no 1o tick do quadro) | ok |
+| Raio 1,5 tile desligada ou com carga 0; L nao acende com 0% | tests/battery.test.ts > "carga zerada: raio 1,5 tile e L nao acende" e "luz desligada com carga: raio 96 px" | ok |
+| Indicador sempre visivel com icone e % inteiro | codigo: src/render/hudView.ts (icone + texto, scrollFactor 0, sem Light2D) atualizado em GameScene.draw; % em tests/battery.test.ts > "porcentagem fica em 0..100". Aparencia: so no playtest | ok (visual no playtest) |
+| Testes de simulacao cobrem os 4 casos | tests/battery.test.ts (gasto, desligada, intervalo, raio zerado) | ok |
+
+Nao foi preciso escrever testes novos de QA.
+
+Roteiro de playtest:
+1. Abra o jogo: confira a bateria no canto superior esquerdo mostrando 100% e a luz com raio grande (4 tiles).
+2. Fique parado e ande um pouco: a porcentagem deve cair de forma continua, chegando a 0% em cerca de 2 min 30 s.
+3. Aperte L: a luz encolhe para um circulo pequeno (1,5 tile) e a porcentagem para de cair. Aperte L de novo: volta o raio grande e o gasto.
+4. Aperte L duas vezes bem rapido: o segundo aperto logo em seguida deve ser ignorado (meio segundo de intervalo). Segurar L nao deve ficar alternando.
+5. Deixe a carga chegar a 0%: a luz apaga sozinha (raio pequeno), o HUD continua visivel com 0% e L nao acende mais.
 
 ## Historico
 - 2026-10-22 15:58 | SM | criado no backlog (Fase 2)
@@ -95,3 +114,4 @@ Fora do escopo (nao fazer):
 - 2026-10-29 13:14 | SM | refinamento -> dev; worktree .worktrees/006 (branch card/006); resultado pendente. 005 mergeado.
 - 2026-10-29 13:20 | SM | dev -> review; resultado pendente.
 - 2026-10-29 13:24 | SM | review -> qa; resultado pendente.
+- 2026-10-29 13:28 | SM | qa -> playtest (playtest: sim); resultado pendente, aguarda o Guilherme.
