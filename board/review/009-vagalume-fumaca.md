@@ -1,7 +1,7 @@
 ---
 id: 009
 titulo: Vagalume-fumaça com telegrafia
-coluna: dev
+coluna: review
 resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 0
 fase: 2
@@ -76,6 +76,11 @@ Base no main: `step()` em `src/sim/step.ts` (move Enzo, depois `trySwing`), `dam
 - Alterar a tecla K, o alvo de treino ou o HUD alem do necessario.
 
 ## Notas do dev
+- Feito conforme as tarefas: `src/data/creatures.ts`, `src/sim/rng.ts` (mulberry32), `src/sim/creatures.ts` (stepCreatures, touchCreatures), tipos/estado inicial com seed, golpe atinge criaturas (`lastDeath`), ordem do `step()` = Enzo, golpe, criaturas, contato. Render: circulo amarelo, fumaca cinza e brasas laranja subindo por 0,8 s, no mesmo grafico de combate (depth acima do mapa).
+- Decisoes: spawns em tile bloqueado do mapa dado sao ignorados (assim mapas de teste como FREE_MAP nao ganham criaturas fora do lugar). Ao voltar de chase para wander, sorteia rumo novo na hora. Criatura morta some no mesmo tick, entao o flash de acerto so aparece se ela sobreviver (teste usa hp 5); a morte e mostrada pela fumaca.
+- Fora: telegrafia/ataque forte (fora do escopo), brasas coletaveis, pathfinding.
+- `npm run test -- --run`: 138 passaram. `npm run build`: ok. Commit 551dff1 em card/009.
+- Verificado so por codigo/testes (nao visto no jogo): aparencia e depth da criatura e da fumaca/brasas, sensacao de velocidade e dos valores de teste (raio de contato, intervalo de vagar), vagar nos 3 spawns do TEST_MAP.
 
 ## Comentarios
 - 2026-10-22 | PO | A ideia pedia "ataque com telegrafia e janela de punição". A ficha do Vagalume-fumaça na bíblia (seção 9) só tem dano por contato: não existe ataque forte, aviso nem janela de punição para ele. Como a bíblia manda e proíbe inventar comportamento, esses itens ficaram fora deste card. A telegrafia (0,8 s) e a janela de punição entram nos cards das criaturas que têm ataque forte (ex.: Porco-do-mato). Se o Guilherme quiser um ataque telegrafado para o Vagalume, precisa antes decidir e registrar na bíblia.
@@ -87,3 +92,4 @@ Base no main: `step()` em `src/sim/step.ts` (move Enzo, depois `trySwing`), `dam
 - 2026-10-22 15:59 | SM | PO aprovou; card fica no backlog: fase 2 > fase atual 1 (aguarda Guilherme atualizar docs/fases-do-projeto.md)
 - 2026-10-29 18:42 | SM | backlog -> refinamento (dependências 005, 007, 008 no main; fase 2 = fase atual); resultado pendente.
 - 2026-10-29 19:00 | SM | refinamento -> dev; worktree .worktrees/009 (branch card/009); resultado pendente. Arquiteto mudou playtest para sim. Título menciona telegrafia mas o escopo não tem (bíblia sec. 9): ver comentário do arquiteto.
+- 2026-10-29 19:20 | SM | dev -> review; resultado pendente.
