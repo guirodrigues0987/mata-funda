@@ -2,7 +2,7 @@
 id: 006
 titulo: Bateria da lanterna
 coluna: done
-resultado: aprovado
+resultado: concluido
 retrabalho: 0
 fase: 2
 tipo: feature
@@ -116,3 +116,4 @@ Roteiro de playtest:
 - 2026-10-29 13:24 | SM | review -> qa; resultado pendente.
 - 2026-10-29 13:28 | SM | qa -> playtest (playtest: sim); resultado pendente, aguarda o Guilherme.
 - 2026-10-29 13:40 | SM | Guilherme aprovou o playtest ("aprovado 006", no terminal). playtest -> done; resultado pendente para o redator.
+- 2026-10-29 13:46 | SM | redator ok; merge --no-ff de card/006 no main; worktree e branch removidos; concluido.
