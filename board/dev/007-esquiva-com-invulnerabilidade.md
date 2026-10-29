@@ -1,15 +1,15 @@
 ---
 id: 007
 titulo: Esquiva com invulnerabilidade
-coluna: refinamento
-resultado: aprovado      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
+coluna: dev
+resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 0
 fase: 2
 tipo: feature
 executor: claude
 playtest: sim
 estimativa: P
-branch:
+branch: card/007
 ---
 
 ## Ideia
@@ -69,3 +69,4 @@ Fora do escopo: esquiva dupla, bloqueio em agua rasa, esquiva perfeita, invulner
 - 2026-10-22 15:58 | SM | criado no backlog (Fase 2)
 - 2026-10-22 15:59 | SM | PO aprovou; card fica no backlog: fase 2 > fase atual 1 (aguarda Guilherme atualizar docs/fases-do-projeto.md)
 - 2026-10-22 16:51 | SM | backlog -> refinamento (PO aprovou; Fase atual agora é 2)
+- 2026-10-29 13:47 | SM | refinamento -> dev; worktree .worktrees/007 (branch card/007); resultado pendente. 006 mergeado.
