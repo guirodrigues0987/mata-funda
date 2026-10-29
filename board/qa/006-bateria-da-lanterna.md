@@ -1,8 +1,8 @@
 ---
 id: 006
 titulo: Bateria da lanterna
-coluna: review
-resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
+coluna: qa
+resultado: pendente
 retrabalho: 0
 fase: 2
 tipo: feature
@@ -86,9 +86,12 @@ Fora do escopo (nao fazer):
 
 - 2026-10-22 | Arquiteto | Plano pronto, estimativa M. playtest: sim (mexe em luz, sensação de jogo; PO tinha deixado nao). Decisões fixadas: carga em ticks inteiros (9000), % com ceil, L como pulso por aperto, intervalo de 30 ticks só conta após toggle efetivo, comando toggleLight opcional para não quebrar testes atuais.
 
+- 2026-10-29 | Revisor | Aprovado: passou em todo o checklist (escopo, bíblia, separação sim/render, dados, determinismo, testes 64 ok, sem dependência nova). (opcional) strokeThickness: 4 em src/render/hudView.ts poderia ir para RENDER.hud.
+
 ## Historico
 - 2026-10-22 15:58 | SM | criado no backlog (Fase 2)
 - 2026-10-22 15:59 | SM | PO aprovou; card fica no backlog: fase 2 > fase atual 1 (aguarda Guilherme atualizar docs/fases-do-projeto.md)
 - 2026-10-22 16:51 | SM | backlog -> refinamento (PO aprovou; Fase atual agora é 2)
 - 2026-10-29 13:14 | SM | refinamento -> dev; worktree .worktrees/006 (branch card/006); resultado pendente. 005 mergeado.
 - 2026-10-29 13:20 | SM | dev -> review; resultado pendente.
+- 2026-10-29 13:24 | SM | review -> qa; resultado pendente.
