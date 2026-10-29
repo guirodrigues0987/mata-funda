@@ -1,9 +1,9 @@
 ---
 id: 008
 titulo: Golpe com o Galho, vida e dano
-coluna: playtest
-resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
-retrabalho: 0
+coluna: dev
+resultado: pendente
+retrabalho: 1
 fase: 2
 tipo: feature
 executor: claude
@@ -113,3 +113,4 @@ Roteiro de playtest:
 - 2026-10-29 15:40 | SM | dev -> review; resultado pendente.
 - 2026-10-29 15:45 | SM | review -> qa; resultado pendente.
 - 2026-10-29 15:52 | SM | qa -> playtest (playtest: sim); resultado pendente, aguarda o Guilherme.
+- 2026-10-29 16:05 | SM | Guilherme reprovou o playtest (no terminal): "a parte da vida até desmaiar funcionou ok, mas não apareceu nenhum monstro nem consegui atirar". Ou seja: tecla K, vida, invulnerabilidade e desmaio ok; alvo de treino não aparece e o golpe (clique esquerdo) não sai. playtest -> dev; retrabalho 1; resultado pendente.
