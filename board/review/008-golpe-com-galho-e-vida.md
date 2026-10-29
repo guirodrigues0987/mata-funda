@@ -1,7 +1,7 @@
 ---
 id: 008
 titulo: Golpe com o Galho, vida e dano
-coluna: dev
+coluna: review
 resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 0
 fase: 2
@@ -74,6 +74,11 @@ Contexto do main: `Command` so tem `moveX/moveY`; `GameState` so tem `tick` e `p
 **Fora do escopo:** outras armas (Facao, Lanca, Borduna, estilingue), criaturas ou IA, dano por contato, esquiva, perda de brasas e retorno a Fogueira ao desmaiar, colisao com mapa (card 005), HUD final de vida, efeitos de som ou particulas, knockback, animacao do Enzo, qualquer duracao/recuperacao do golpe alem do intervalo de 0,4 s.
 
 ## Notas do dev
+- Feito: dados em src/data/combat.ts; src/sim/combat.ts (secondsToTicks, inSwing, trySwing, damagePlayer); step com timers, movimento e golpe; Command/GameState estendidos; render com clique esquerdo, alvo, arco do golpe, piscar, texto de vida e tecla K (temporaria).
+- Decisoes: ja existia `damagePlayer` (card 007, em damage.ts) e `hp`; movi/estendi `damagePlayer` para combat.ts (continua ignorando dano durante esquiva, agora tambem ignora na invulnerabilidade de 1 s e apos desmaio). `PLAYER.maxHp` agora vem de `ENZO_COMBAT.maxHp`. Posicao do alvo de treino e relativa ao spawn do Enzo (`offsetX: 192`), pois (192,0) absoluto cairia em parede do mapa de teste.
+- Fora: nada do escopo ficou de fora.
+- npm run test: 12 arquivos, 93 testes passando. npm run build: ok.
+- Verificado so por codigo/testes (nao jogado): clique/mira no mouse (pointer worldX/Y), desenho do arco e do alvo, piscar, texto de vida e tecla K.
 
 ## Comentarios
 - 2026-10-22 | PO | A bíblia só define o Galho por "intervalo" de 0,4 s; não há duração de animação nem tempo de recuperação separados, então usei só o intervalo e não inventei outros números. A vida do alvo de treino também não está na bíblia: é valor de teste, escolhido na implementação (sugestão para quem refinar: múltiplo de 2). Obs. para o SM: o card é de fase 2 e a fase atual no documento ainda é 1.
@@ -84,3 +89,4 @@ Contexto do main: `Command` so tem `moveX/moveY`; `GameState` so tem `tick` e `p
 - 2026-10-22 15:59 | SM | PO aprovou; card fica no backlog: fase 2 > fase atual 1 (aguarda Guilherme atualizar docs/fases-do-projeto.md)
 - 2026-10-22 16:51 | SM | backlog -> refinamento (PO aprovou; Fase atual agora é 2)
 - 2026-10-29 15:19 | SM | refinamento -> dev; worktree .worktrees/008 (branch card/008); resultado pendente. 007 mergeado.
+- 2026-10-29 15:40 | SM | dev -> review; resultado pendente.
