@@ -2,7 +2,7 @@
 id: 006
 titulo: Bateria da lanterna
 coluna: done
-resultado: pendente
+resultado: aprovado
 retrabalho: 0
 fase: 2
 tipo: feature
