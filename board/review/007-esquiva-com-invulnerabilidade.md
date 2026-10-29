@@ -1,7 +1,7 @@
 ---
 id: 007
 titulo: Esquiva com invulnerabilidade
-coluna: dev
+coluna: review
 resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 0
 fase: 2
@@ -60,6 +60,10 @@ Dados: `PLAYER.maxHp = 10`; `DODGE.distanceTiles = 3`, `durationSeconds = 0.25`,
 Fora do escopo: esquiva dupla, bloqueio em agua rasa, esquiva perfeita, invulnerabilidade de 1 s apos dano, colisao com o mapa durante o rolamento (card 005), vida/morte/desmaio e HUD (card 008), animacao/arte, gamepad (A/X), qualquer criatura real, desenhar o alvo de teste na cena.
 
 ## Notas do dev
+- Feito: dados (`DODGE`, `PLAYER.maxHp`, `TEST_HAZARD`), `src/sim/dodge.ts`, `src/sim/damage.ts` (`damagePlayer`, `touchHazard`), `step` com rolamento (15 ticks, 12,8 px/tick, dir fixa), `player.hp` e `player.dodge` no estado, tecla Espaco (JustDown so no primeiro tick do quadro) e marcador semitransparente enquanto rola. Testes em `tests/dodge.test.ts`.
+- Decisoes seguiram o card (Espaco parado ignorado; recarga de 48 ticks contada do inicio do rolamento). Ajustei `tests/collision.test.ts` e `tests/battery.test.ts` para o novo formato de estado/Keys.
+- Verificado so por codigo/testes: sensacao do rolamento, tecla Espaco real no navegador e o marcador semitransparente (playtest do Guilherme).
+- `npm run test -- --run`: 78 testes passando. `npm run build`: OK.
 
 ## Comentarios
 - 2026-10-22 | PO | Fora do escopo por ainda não valer nesta fase/card: Esquiva dupla (habilidade da árvore), proibição de esquivar em água rasa (Igapó), esquiva perfeita e a invulnerabilidade de 1 s após levar dano. A bíblia não define o que acontece ao apertar Espaço com o Enzo parado, nem se os 0,8 s contam do início ou do fim do rolamento; por isso os critérios cobrem só esquiva em movimento e falam em "depois de uma esquiva". Se o Guilherme quiser definir esses casos, vale registrar na bíblia antes. Atenção: o card é fase 2 e a fase atual no documento de fases ainda é 1 (decisão do SM).
@@ -70,3 +74,4 @@ Fora do escopo: esquiva dupla, bloqueio em agua rasa, esquiva perfeita, invulner
 - 2026-10-22 15:59 | SM | PO aprovou; card fica no backlog: fase 2 > fase atual 1 (aguarda Guilherme atualizar docs/fases-do-projeto.md)
 - 2026-10-22 16:51 | SM | backlog -> refinamento (PO aprovou; Fase atual agora é 2)
 - 2026-10-29 13:47 | SM | refinamento -> dev; worktree .worktrees/007 (branch card/007); resultado pendente. 006 mergeado.
+- 2026-10-29 13:55 | SM | dev -> review; resultado pendente.
