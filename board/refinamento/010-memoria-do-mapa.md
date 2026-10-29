@@ -1,8 +1,8 @@
 ---
 id: 010
 titulo: Memória do mapa
-coluna: backlog
-resultado: aprovado      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
+coluna: refinamento
+resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 0
 fase: 2
 tipo: feature
@@ -45,3 +45,4 @@ Como jogador, quero que as partes do mapa que o Enzo já viu continuem visíveis
 ## Historico
 - 2026-10-22 15:58 | SM | criado no backlog (Fase 2)
 - 2026-10-22 15:59 | SM | PO aprovou; card fica no backlog: fase 2 > fase atual 1 (aguarda Guilherme atualizar docs/fases-do-projeto.md)
+- 2026-10-29 18:42 | SM | backlog -> refinamento (dependências 005, 007, 008 no main; fase 2 = fase atual); resultado pendente.
