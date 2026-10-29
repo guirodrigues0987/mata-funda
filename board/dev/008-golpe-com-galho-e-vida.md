@@ -1,15 +1,15 @@
 ---
 id: 008
 titulo: Golpe com o Galho, vida e dano
-coluna: refinamento
-resultado: aprovado      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
+coluna: dev
+resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 0
 fase: 2
 tipo: feature
 executor: claude
 playtest: sim
 estimativa: M
-branch:
+branch: card/008
 ---
 
 ## Ideia
@@ -83,3 +83,4 @@ Contexto do main: `Command` so tem `moveX/moveY`; `GameState` so tem `tick` e `p
 - 2026-10-22 15:58 | SM | criado no backlog (Fase 2)
 - 2026-10-22 15:59 | SM | PO aprovou; card fica no backlog: fase 2 > fase atual 1 (aguarda Guilherme atualizar docs/fases-do-projeto.md)
 - 2026-10-22 16:51 | SM | backlog -> refinamento (PO aprovou; Fase atual agora é 2)
+- 2026-10-29 15:19 | SM | refinamento -> dev; worktree .worktrees/008 (branch card/008); resultado pendente. 007 mergeado.
