@@ -45,3 +45,10 @@ Quem fez: PO → Arquiteto → Dev (Claude) → Revisor → QA → Playtest (Gui
 Retrabalhos: 0
 O que mudou no jogo: a câmera passou a seguir o Enzo por um mapa fixo de 40x24 tiles, com corredor, sala e obstáculos que ele não atravessa, e a luz do card 003 continua acompanhando.
 Curiosidade: o PO marcou o card sem playtest, mas o Arquiteto pediu playtest por mexer em movimento, e o card passou por todo o quadro sem nenhum retrabalho. A colisão ficou na simulação pura, sem Phaser, e o QA testou todos os tiles livres do mapa nas 8 direções. O card esperou uns dias pelo playtest, aprovado pelo Guilherme via Telegram.
+
+
+### 2026-10-29 — Card 006: Bateria da lanterna
+Quem fez: PO → Arquiteto → Dev (Claude) → Revisor → QA → Playtest (Guilherme)
+Retrabalhos: 0
+O que mudou no jogo: a lanterna do celular agora gasta bateria (150 s de 100% a 0%), liga e desliga com a tecla L, e um indicador no canto da tela mostra a carga.
+Curiosidade: o Arquiteto guardou a carga em ticks inteiros (9000) em vez de decimais, assim 150 s fecham exatamente, sem erro de arredondamento. Ele também elevou o card para playtest, e o Guilherme aprovou no terminal.
