@@ -1,7 +1,7 @@
 ---
 id: 008
 titulo: Golpe com o Galho, vida e dano
-coluna: review
+coluna: qa
 resultado: pendente
 retrabalho: 2
 fase: 2
@@ -95,6 +95,7 @@ Retrabalho 1 (playtest reprovado: alvo nao aparecia, golpe nao saia):
 - 2026-10-29 | Revisor | Passou no checklist. Mover damagePlayer de damage.ts para combat.ts esta dentro do escopo (tarefa 3 pede damagePlayer em combat.ts; damage.ts so reimporta, esquiva e touchHazard preservados) e a tecla K temporaria esta prevista na tarefa 5. Testes (93) e build ok. (opcional) dano 3 da tecla K e 0,1 s do arco estao fixos em GameScene; mover para src/data. (opcional) offset do alvo de treino relativo ao spawn e desvio justificado da tarefa 1.
 - 2026-10-29 | QA | resultado: aprovado. Suite completa: 12 arquivos, 93 testes ok; build ok (so aviso de chunk grande). Nenhum teste novo do QA foi necessario (tests/combat.test.ts cobre tudo).
 - 2026-10-29 | Revisor | Retrabalho 1: reprovado. (1) Causa do dev e consistente: em GameScene o combatGfx era criado antes das Images do mapa (todas depth 0, Phaser desenha por ordem de criacao), entao os tiles cobriam alvo e arco; Graphics nao usa Light2D, entao ignora o escuro; Enzo (criado depois) aparecia, o que bate. A correcao RENDER.depth (map 0, combat 10, enzo 20) esta certa e dentro do escopo; o diff contra main so tem arquivos do card. (2) Problema nao tratado, que explica "o golpe nao saia": src/render/GameScene.ts update(), linhas ~60-71: `attackPulse = this.clicked; this.clicked = false;` limpa o clique mesmo quando `advanced.ticks === 0`, e entao nenhum `step` recebe `attack: true` e o clique se perde. O clock acumula em passos de 16,67 ms; em monitor 120/144 Hz a maioria dos quadros tem 0 ticks, e em 60 Hz isso tambem ocorre por jitter. Mudar para limpar `this.clicked` so quando `advanced.ticks > 0` (ou manter o flag ate ser consumido por um tick). O restante da entrada esta correto: pointerdown + leftButtonDown, aim = worldX/worldY - player (camera so centerOn, sem scrollFactor/zoom no mapa, entao worldX/Y e coordenada do mundo, igual a do Enzo), readCommand repassa attack/aimX/aimY e trySwing os usa. (3) tests/visibility.test.ts: `expect(LIGHT).toBeDefined()` (linha 15) e vazio e o import de LIGHT so existe para isso; remova. O teste de depth so compara constantes de dados, nao garante que GameScene as aplica (aceitavel, mas nao prova a correcao). (4) Faltou teste do fluxo clique->comando: sugiro extrair a logica "consumir clique so se houve tick" para funcao pura em src/render/ e testa-la. (opcional) 0xaa4444, 0xffffff, 0.1 s do arco e dano 3 da tecla K fixos em GameScene; mover para src/data. (opcional) activePointer.worldX/Y pode ficar defasado com o mouse parado e a camera se movendo; recalcular com camera.getWorldPoint(ptr.x, ptr.y).
+- 2026-10-29 | Revisor | Retrabalho 2: passou no checklist. Resolvido: (1) consumeClick (src/render/clickPulse.ts) so zera o clique quando ha tick; GameScene.update usa click.pending/pulse corretamente; (2) expect(LIGHT) e import removidos; (3) mira por camera.getWorldPoint e valores visuais/dano K em COMBAT_VIEW (src/data/combat.ts). Fluxo conferido: pointerdown -> clicked -> consumeClick -> attack so no 1o tick -> command() aim -> readCommand -> step (timers, movimento, trySwing) -> dano/lastSwing -> drawCombat. Diff contra main so tem arquivos do card, sem Math.random/Date.now/rede, sim sem Phaser. 99 testes e build ok. Pendente so de playtest (mouse, arco e alvo na tela).
 
 | Critério | Evidência | Status |
 |---|---|---|
@@ -127,3 +128,4 @@ Roteiro de playtest:
 - 2026-10-29 16:20 | SM | dev -> review (retrabalho 1); resultado pendente.
 - 2026-10-29 16:30 | SM | revisor reprovou (clique perdido em quadros sem tick em GameScene.update; teste visibility com expect inútil; comentários no card). review -> dev; retrabalho 2; resultado pendente. Atenção: no retrabalho 3 o card é bloqueado.
 - 2026-10-29 16:45 | SM | dev -> review (retrabalho 2); resultado pendente.
+- 2026-10-29 16:52 | SM | review -> qa (retrabalho 2); resultado pendente.
