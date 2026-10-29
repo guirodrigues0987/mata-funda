@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 import { PALETTE } from "../data/palette";
-import { ENZO_COMBAT, WEAPONS } from "../data/combat";
+import { COMBAT_VIEW, ENZO_COMBAT, WEAPONS } from "../data/combat";
 import { RENDER } from "../data/render";
 import { SIM } from "../data/sim";
 import { WORLD } from "../data/world";
@@ -12,6 +12,7 @@ import { createMapView } from "./mapView";
 import { createBatteryHud, updateBatteryHud } from "./hudView";
 import type { BatteryHud } from "./hudView";
 import { readCommand } from "./readCommand";
+import { consumeClick } from "./clickPulse";
 
 export class GameScene extends Phaser.Scene {
   private state: GameState = createInitialState();
@@ -58,9 +59,10 @@ export class GameScene extends Phaser.Scene {
     let pulse = Phaser.Input.Keyboard.JustDown(this.lKey);
     let dodgePulse = Phaser.Input.Keyboard.JustDown(this.spaceKey);
     // TEMPORARIO (playtest): K causa 3 de dano ao Enzo.
-    if (Phaser.Input.Keyboard.JustDown(this.kKey)) this.state = damagePlayer(this.state, 3);
-    let attackPulse = this.clicked;
-    this.clicked = false;
+    if (Phaser.Input.Keyboard.JustDown(this.kKey)) this.state = damagePlayer(this.state, COMBAT_VIEW.debugKeyDamage);
+    const click = consumeClick(this.clicked, advanced.ticks);
+    let attackPulse = click.pulse;
+    this.clicked = click.pending;
     for (let i = 0; i < advanced.ticks; i++) {
       this.state = step(this.state, this.command(pulse, dodgePulse, attackPulse));
       pulse = false;
@@ -72,6 +74,7 @@ export class GameScene extends Phaser.Scene {
 
   private command(toggleLight: boolean, dodge: boolean, attack: boolean) {
     const ptr = this.input.activePointer;
+    const world = this.cameras.main.getWorldPoint(ptr.x, ptr.y);
     return readCommand({
       left: this.wasd.A.isDown,
       right: this.wasd.D.isDown,
@@ -80,8 +83,8 @@ export class GameScene extends Phaser.Scene {
       toggleLight,
       dodge,
       attack,
-      aimX: ptr.worldX - this.state.player.x,
-      aimY: ptr.worldY - this.state.player.y,
+      aimX: world.x - this.state.player.x,
+      aimY: world.y - this.state.player.y,
     });
   }
 
@@ -99,14 +102,16 @@ export class GameScene extends Phaser.Scene {
     const g = this.combatGfx;
     const st = this.state;
     g.clear();
-    g.fillStyle(0xaa4444, 1);
-    for (const d of st.dummies) g.fillRect(d.x - 16, d.y - 24, 32, 48);
+    g.fillStyle(COMBAT_VIEW.dummyColor, 1);
+    const dw = COMBAT_VIEW.dummyWidthPx;
+    const dh = COMBAT_VIEW.dummyHeightPx;
+    for (const d of st.dummies) g.fillRect(d.x - dw / 2, d.y - dh / 2, dw, dh);
     const sw = st.lastSwing;
-    if (sw !== null && st.tick - sw.tick <= Math.round(0.1 * SIM.ticksPerSecond)) {
+    if (sw !== null && st.tick - sw.tick <= Math.round(COMBAT_VIEW.arcShowSeconds * SIM.ticksPerSecond)) {
       const w = WEAPONS.galho;
       const a = Math.atan2(sw.dirY, sw.dirX);
       const half = (w.arcDegrees / 2) * (Math.PI / 180);
-      g.lineStyle(6, 0xffffff, 1);
+      g.lineStyle(COMBAT_VIEW.arcLineWidthPx, COMBAT_VIEW.arcColor, 1);
       g.beginPath();
       g.arc(st.player.x, st.player.y, w.reachTiles * WORLD.tilePx, a - half, a + half);
       g.strokePath();
