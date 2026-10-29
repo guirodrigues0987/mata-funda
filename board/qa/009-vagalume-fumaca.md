@@ -1,7 +1,7 @@
 ---
 id: 009
 titulo: Vagalume-fumaça com telegrafia
-coluna: review
+coluna: qa
 resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 0
 fase: 2
@@ -86,6 +86,7 @@ Base no main: `step()` em `src/sim/step.ts` (move Enzo, depois `trySwing`), `dam
 - 2026-10-22 | PO | A ideia pedia "ataque com telegrafia e janela de punição". A ficha do Vagalume-fumaça na bíblia (seção 9) só tem dano por contato: não existe ataque forte, aviso nem janela de punição para ele. Como a bíblia manda e proíbe inventar comportamento, esses itens ficaram fora deste card. A telegrafia (0,8 s) e a janela de punição entram nos cards das criaturas que têm ataque forte (ex.: Porco-do-mato). Se o Guilherme quiser um ataque telegrafado para o Vagalume, precisa antes decidir e registrar na bíblia.
 - 2026-10-22 | PO | Soltar brasas coletáveis (moeda) depende da progressão de brasas, que não faz parte dos cards 005, 007 e 008; aqui só vale o efeito visual de fumaça e brasas. Depende dos cards 005, 007 e 008.
 - 2026-10-29 | Arquiteto | Plano pronto, estimativa M. Playtest alterado para `sim` (criatura/combate). Valores nao vindos da biblia (intervalo de mudanca de direcao do vagar, raio de contato, tamanho) ficam em `src/data/creatures.ts` como valores de teste para o Guilherme ajustar no playtest.
+- 2026-10-29 | Revisor | Aprovado: passou no checklist. Ordem em step() correta (Enzo, golpe, criaturas, contato); RNG por seed sem Math.random/Date.now; colisao via moveWithCollision; raio estrito (<3 tiles); contato reaproveita damagePlayer; circulo e fumaca/brasas no grafico de combate (depth 10, acima do mapa 0); sem telegrafia nem brasas coletaveis; 138 testes passam. (opcional) src/sim/step.ts: imports de ./collision duplicados e fora de ordem (linhas 7-11). (opcional) GameScene.ts: o 0.5 do achatamento vertical da fumaca poderia ir para COMBAT_VIEW. (opcional) hitFeedback.ts: linha do flashTargetId muito longa. (opcional) teste de colisao com parede entre criatura e Enzo nao garante modo chase; considerar forcar Enzo perto.
 
 ## Historico
 - 2026-10-22 15:58 | SM | criado no backlog (Fase 2)
@@ -93,3 +94,4 @@ Base no main: `step()` em `src/sim/step.ts` (move Enzo, depois `trySwing`), `dam
 - 2026-10-29 18:42 | SM | backlog -> refinamento (dependências 005, 007, 008 no main; fase 2 = fase atual); resultado pendente.
 - 2026-10-29 19:00 | SM | refinamento -> dev; worktree .worktrees/009 (branch card/009); resultado pendente. Arquiteto mudou playtest para sim. Título menciona telegrafia mas o escopo não tem (bíblia sec. 9): ver comentário do arquiteto.
 - 2026-10-29 19:20 | SM | dev -> review; resultado pendente.
+- 2026-10-29 19:30 | SM | review -> qa; resultado pendente.
