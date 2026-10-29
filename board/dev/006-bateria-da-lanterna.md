@@ -1,15 +1,15 @@
 ---
 id: 006
 titulo: Bateria da lanterna
-coluna: refinamento
-resultado: aprovado      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
+coluna: dev
+resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 0
 fase: 2
 tipo: feature
 executor: claude
 playtest: sim
 estimativa: M
-branch:
+branch: card/006
 ---
 
 ## Ideia
@@ -86,3 +86,4 @@ Fora do escopo (nao fazer):
 - 2026-10-22 15:58 | SM | criado no backlog (Fase 2)
 - 2026-10-22 15:59 | SM | PO aprovou; card fica no backlog: fase 2 > fase atual 1 (aguarda Guilherme atualizar docs/fases-do-projeto.md)
 - 2026-10-22 16:51 | SM | backlog -> refinamento (PO aprovou; Fase atual agora é 2)
+- 2026-10-29 13:14 | SM | refinamento -> dev; worktree .worktrees/006 (branch card/006); resultado pendente. 005 mergeado.
