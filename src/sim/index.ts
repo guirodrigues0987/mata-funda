@@ -7,3 +7,4 @@ export * from "./light";
 export * from "./collision";
 export * from "./dodge";
 export * from "./damage";
+export * from "./combat";
