@@ -1,8 +1,8 @@
 ---
 id: 008
 titulo: Golpe com o Galho, vida e dano
-coluna: playtest
-resultado: bloqueado
+coluna: dev
+resultado: pendente
 retrabalho: 3
 fase: 2
 tipo: feature
@@ -145,3 +145,4 @@ Roteiro de playtest (o servidor de dev já roda no worktree; RECARREGUE a págin
 - 2026-10-29 16:52 | SM | review -> qa (retrabalho 2); resultado pendente.
 - 2026-10-29 17:00 | SM | qa -> playtest (retrabalho 2, playtest: sim); resultado pendente, aguarda o Guilherme.
 - 2026-10-29 17:20 | SM | Guilherme reprovou o playtest (no terminal): "reprovado 008: está aparecendo o arco quando eu clico, mas não aparece se eu dou dano ou o projétil. Eu tenho que encostar o arco no inimigo para poder dar dano nele". Retrabalho chegou a 3: card BLOQUEADO (fica em playtest/, não volta para dev). Pontos: (1) falta feedback visível de acerto/dano no alvo; (2) o alcance do Galho é 1 tile, arco 90° (bíblia 5.2, corpo a corpo, sem projétil; o projétil é do Estilingue, fora do escopo do card). Aguarda decisão do Guilherme sobre o que ele espera do golpe.
+- 2026-10-29 17:25 | SM | Guilherme decidiu (no terminal) destravar o card com "só feedback de acerto": manter Galho corpo a corpo, 1 tile, arco 90° (bíblia 5.2) e acrescentar feedback visível quando o golpe acerta (alvo pisca, número do dano, barra de vida do alvo). Retrabalho continua 3 (registro), bloqueio levantado por decisão do Guilherme. playtest -> dev; resultado pendente. Antes do dev: PO acrescenta o critério e o arquiteto as tarefas.
