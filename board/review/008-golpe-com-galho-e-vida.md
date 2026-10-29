@@ -1,7 +1,7 @@
 ---
 id: 008
 titulo: Golpe com o Galho, vida e dano
-coluna: dev
+coluna: review
 resultado: pendente
 retrabalho: 1
 fase: 2
@@ -80,6 +80,11 @@ Contexto do main: `Command` so tem `moveX/moveY`; `GameState` so tem `tick` e `p
 - npm run test: 12 arquivos, 93 testes passando. npm run build: ok.
 - Verificado so por codigo/testes (nao jogado): clique/mira no mouse (pointer worldX/Y), desenho do arco e do alvo, piscar, texto de vida e tecla K.
 
+Retrabalho 1 (playtest reprovado: alvo nao aparecia, golpe nao saia):
+- Causa raiz (por analise do codigo): o Graphics do combate (alvo + arco) era criado ANTES das imagens do mapa e todos estavam em depth 0; o Phaser desenha na ordem de criacao, entao os tiles do mapa cobriam o alvo e o arco. O clique/dano provavelmente funcionavam, mas nada era visivel. Correcao: camadas em RENDER.depth (mapa 0, combate 10, Enzo 20) aplicadas em GameScene. O Graphics nao depende de Light2D, entao aparece mesmo no escuro; o alvo fica a 192 px (< 256 px da luz), em tile de chao.
+- Teste novo tests/visibility.test.ts (alvo em chao, dentro do raio de luz, ordem das camadas). 95 testes ok, build ok.
+- Verificado so por codigo/testes (nao jogado): que o alvo e o arco agora aparecem de fato, e que o clique esquerdo chega ao jogo (pointerdown/worldX); se ainda falhar no playtest, a suspeita seguinte e a entrada do mouse.
+
 ## Comentarios
 - 2026-10-22 | PO | A bíblia só define o Galho por "intervalo" de 0,4 s; não há duração de animação nem tempo de recuperação separados, então usei só o intervalo e não inventei outros números. A vida do alvo de treino também não está na bíblia: é valor de teste, escolhido na implementação (sugestão para quem refinar: múltiplo de 2). Obs. para o SM: o card é de fase 2 e a fase atual no documento ainda é 1.
 - 2026-10-22 | Arquiteto | Plano pronto, estimativa M. Mudei playtest de nao para sim: o card e combate e define a sensacao do golpe (alcance, arco, ritmo de 0,4 s, piscar da invulnerabilidade). Vida do alvo de treino definida em 6 (3 golpes). Command ganha campos opcionais para reduzir conflito com os cards 005 e 007, que tambem mexem em Command/GameState; quem entrar depois resolve o merge.
@@ -114,3 +119,4 @@ Roteiro de playtest:
 - 2026-10-29 15:45 | SM | review -> qa; resultado pendente.
 - 2026-10-29 15:52 | SM | qa -> playtest (playtest: sim); resultado pendente, aguarda o Guilherme.
 - 2026-10-29 16:05 | SM | Guilherme reprovou o playtest (no terminal): "a parte da vida até desmaiar funcionou ok, mas não apareceu nenhum monstro nem consegui atirar". Ou seja: tecla K, vida, invulnerabilidade e desmaio ok; alvo de treino não aparece e o golpe (clique esquerdo) não sai. playtest -> dev; retrabalho 1; resultado pendente.
+- 2026-10-29 16:20 | SM | dev -> review (retrabalho 1); resultado pendente.
