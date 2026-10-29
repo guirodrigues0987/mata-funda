@@ -1,7 +1,7 @@
 ---
 id: 006
 titulo: Bateria da lanterna
-coluna: dev
+coluna: review
 resultado: pendente      # pendente | aprovado | reprovado | bloqueado | cancelado | concluido
 retrabalho: 0
 fase: 2
@@ -76,6 +76,10 @@ Fora do escopo (nao fazer):
 - Nenhuma dependencia nova.
 
 ## Notas do dev
+- Feito: dados (LIGHT estendido, TEXTS, RENDER.hud), tipos (toggleLight opcional, LightState), funcoes puras de luz em src/sim/light.ts, step integrado, readCommand com toggleLight, tecla L (JustDown 1x por quadro, pulso so no primeiro tick), raio da luz Phaser dinamico, HUD de bateria (icone + %, canto superior esquerdo, sem pipeline de luz) em src/render/hudView.ts. Testes em tests/battery.test.ts.
+- Decisao: o icone tem um preenchimento proporcional a carga (alem do texto); sem vermelho/piscar. Fixture de tests/collision.test.ts ajustado (GameState ganhou campo light).
+- Nao verificado no navegador: aparencia do HUD, luz Phaser mudando de raio, tecla L na pratica (playtest).
+- npm run test: 64 passaram. npm run build: ok (so aviso de tamanho de chunk).
 
 ## Comentarios
 - 2026-10-22 | PO | Fora deste card, de propósito (escopo aprovado: só gasto e desligar): recarga em área de descanso e por item, luz piscando e ícone vermelho com 20% ou menos, fala do Enzo com carga baixa, som/mensagem do celular desligando, furtividade com a luz apagada, efeitos de ambiente e habilidades de luz. Cada um precisa de card próprio.
@@ -87,3 +91,4 @@ Fora do escopo (nao fazer):
 - 2026-10-22 15:59 | SM | PO aprovou; card fica no backlog: fase 2 > fase atual 1 (aguarda Guilherme atualizar docs/fases-do-projeto.md)
 - 2026-10-22 16:51 | SM | backlog -> refinamento (PO aprovou; Fase atual agora é 2)
 - 2026-10-29 13:14 | SM | refinamento -> dev; worktree .worktrees/006 (branch card/006); resultado pendente. 005 mergeado.
+- 2026-10-29 13:20 | SM | dev -> review; resultado pendente.
