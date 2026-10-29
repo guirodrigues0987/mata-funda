@@ -10,6 +10,8 @@ export const RENDER = {
   enzoHeightTiles: 1,
   enzoCapHeightTiles: 0.2,
   enzoOutlinePx: 3,
+  // Camadas (maior = por cima). O mapa fica em 0; combate e Enzo precisam ficar acima dele.
+  depth: { map: 0, combat: 10, enzo: 20 },
   hud: {
     marginPx: 24,
     iconWidthPx: 56,
