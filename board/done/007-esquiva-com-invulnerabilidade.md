@@ -2,7 +2,7 @@
 id: 007
 titulo: Esquiva com invulnerabilidade
 coluna: done
-resultado: pendente
+resultado: aprovado
 retrabalho: 0
 fase: 2
 tipo: feature
