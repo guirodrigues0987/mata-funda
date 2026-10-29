@@ -1,7 +1,7 @@
 ---
 id: 008
 titulo: Golpe com o Galho, vida e dano
-coluna: review
+coluna: qa
 resultado: pendente
 retrabalho: 3
 fase: 2
@@ -160,6 +160,8 @@ Roteiro de playtest (o servidor de dev já roda no worktree; RECARREGUE a págin
 4. Aperte K: vida cai 3 e o Enzo pisca por 1 s; K de novo durante o piscar não tira vida.
 5. Aperte K até zerar: a vida para em 0 ("DESMAIOU") e o clique não golpeia mais.
 
+- 2026-10-29 | Revisor | Feedback de acerto (passo 7): passou no checklist. Criterios 7, 8 e 9 atendidos: trySwing grava lastHit so em acerto (dano de WEAPONS.galho; erro, cooldown, fainted e attack ausente preservam o valor; lastSwing segue gravado); hitFeedbackView (funcao pura testada) alimenta drawCombat: alvo pisca com hitFlashColor 0xffee55 por 0,15 s, numero '2' por 0,6 s subindo (usa lastHit.x/y, entao aparece no golpe fatal), barra e texto 'cur/max' todo quadro com max de TRAINING_DUMMY.hp, nada novo no erro. Camadas: Graphics combate depth 10 e os dois Text depth 11, acima do mapa (0); Graphics e Text nao usam Light2D, entao nao sao escurecidos (so as Images do mapa usam). Fluxo conferido: clique -> consumeClick -> attack -> step -> trySwing -> lastHit -> hitFeedbackView -> drawCombat. Sim sem Phaser/Math.random, sem dependencia nova, diff so nos arquivos do passo 7. Testes e build ok. Pendente de playtest (visual). (opcional) GameScene.ts drawCombat tem valores visuais soltos: 36 (offset do numero), strokeThickness 6 e 4, cores '#ffffff'/'#000000' dos Text; mover para COMBAT_VIEW. (opcional) o numero (depth 11) fica abaixo do Enzo (depth 20) se ele estiver sobre o alvo.
+
 ## Historico
 - 2026-10-22 15:58 | SM | criado no backlog (Fase 2)
 - 2026-10-22 15:59 | SM | PO aprovou; card fica no backlog: fase 2 > fase atual 1 (aguarda Guilherme atualizar docs/fases-do-projeto.md)
@@ -178,3 +180,4 @@ Roteiro de playtest (o servidor de dev já roda no worktree; RECARREGUE a págin
 - 2026-10-29 17:25 | SM | Guilherme decidiu (no terminal) destravar o card com "só feedback de acerto": manter Galho corpo a corpo, 1 tile, arco 90° (bíblia 5.2) e acrescentar feedback visível quando o golpe acerta (alvo pisca, número do dano, barra de vida do alvo). Retrabalho continua 3 (registro), bloqueio levantado por decisão do Guilherme. playtest -> dev; resultado pendente. Antes do dev: PO acrescenta o critério e o arquiteto as tarefas.
 - 2026-10-29 17:40 | SM | PO acrescentou 3 critérios de feedback de acerto; arquiteto acrescentou as tarefas (passo 7). Card segue em dev, retrabalho 3, resultado pendente; aciona o dev.
 - 2026-10-29 17:55 | SM | dev -> review (feedback de acerto); resultado pendente.
+- 2026-10-29 18:02 | SM | review -> qa (feedback de acerto); resultado pendente.
