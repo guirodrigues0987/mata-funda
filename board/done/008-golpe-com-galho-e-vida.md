@@ -1,7 +1,7 @@
 ---
 id: 008
 titulo: Golpe com o Galho, vida e dano
-coluna: playtest
+coluna: done
 resultado: pendente
 retrabalho: 3
 fase: 2
@@ -207,3 +207,4 @@ Roteiro de playtest (o servidor de dev já roda no worktree; RECARREGUE a págin
 - 2026-10-29 17:55 | SM | dev -> review (feedback de acerto); resultado pendente.
 - 2026-10-29 18:02 | SM | review -> qa (feedback de acerto); resultado pendente.
 - 2026-10-29 18:12 | SM | qa -> playtest (feedback de acerto, playtest: sim); resultado pendente, aguarda o Guilherme.
+- 2026-10-29 18:30 | SM | Guilherme aprovou o playtest ("aprovado 008", no terminal). playtest -> done; resultado pendente para o redator.
