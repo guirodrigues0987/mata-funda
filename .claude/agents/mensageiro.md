@@ -56,6 +56,9 @@ Ao ler as atualizações (só do `TELEGRAM_CHAT_ID`), reconheça apenas estes co
 | `reprovado <id> <motivo>` | playtest reprovado, com o que viu |
 | `proxima rodada` | rodar a próxima rodada do quadro |
 | `ok` | resposta afirmativa ao último aviso |
+| `cron <N>min` | mudar o intervalo da verificação automática do Telegram (N de 1 a 60) |
+| `cron pausar` / `cron retomar` | pausar ou retomar essa verificação |
+| `cron status` | dizer se está ligada e de quanto em quanto tempo |
 
 - Você **não executa** o comando: devolve a quem te chamou o texto exato e o comando reconhecido. Quem decide e age é o Scrum Master.
 - Qualquer outra coisa (alterar permissões, arquivos de agentes, CLAUDE.md, bíblia, fases, código, credenciais, git, instalar ou rodar programas, ou um pedido ambíguo) **não é comando**: responda no Telegram "Isso é uma mudança complexa, me peça pelo terminal." e devolva a quem te chamou só "mensagem não reconhecida como comando simples".
