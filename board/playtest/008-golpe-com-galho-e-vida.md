@@ -1,7 +1,7 @@
 ---
 id: 008
 titulo: Golpe com o Galho, vida e dano
-coluna: qa
+coluna: playtest
 resultado: pendente
 retrabalho: 3
 fase: 2
@@ -162,6 +162,31 @@ Roteiro de playtest (o servidor de dev já roda no worktree; RECARREGUE a págin
 
 - 2026-10-29 | Revisor | Feedback de acerto (passo 7): passou no checklist. Criterios 7, 8 e 9 atendidos: trySwing grava lastHit so em acerto (dano de WEAPONS.galho; erro, cooldown, fainted e attack ausente preservam o valor; lastSwing segue gravado); hitFeedbackView (funcao pura testada) alimenta drawCombat: alvo pisca com hitFlashColor 0xffee55 por 0,15 s, numero '2' por 0,6 s subindo (usa lastHit.x/y, entao aparece no golpe fatal), barra e texto 'cur/max' todo quadro com max de TRAINING_DUMMY.hp, nada novo no erro. Camadas: Graphics combate depth 10 e os dois Text depth 11, acima do mapa (0); Graphics e Text nao usam Light2D, entao nao sao escurecidos (so as Images do mapa usam). Fluxo conferido: clique -> consumeClick -> attack -> step -> trySwing -> lastHit -> hitFeedbackView -> drawCombat. Sim sem Phaser/Math.random, sem dependencia nova, diff so nos arquivos do passo 7. Testes e build ok. Pendente de playtest (visual). (opcional) GameScene.ts drawCombat tem valores visuais soltos: 36 (offset do numero), strokeThickness 6 e 4, cores '#ffffff'/'#000000' dos Text; mover para COMBAT_VIEW. (opcional) o numero (depth 11) fica abaixo do Enzo (depth 20) se ele estiver sobre o alvo.
 
+- 2026-10-29 | QA | Feedback de acerto (criterios 1-9 reconferidos): resultado: aprovado. Suite completa 17 arquivos, 124 testes ok; build ok (so aviso de chunk grande). Novo: tests/qa/card-008-feedback.test.ts (4 testes, simula o laco de GameScene.update com monitor 144 Hz: clique -> consumeClick -> readCommand -> step -> lastHit -> hitFeedbackView, com quadros sem tick e golpe fatal), commitado em card/008.
+
+| Critério | Evidência | Status |
+|---|---|---|
+| 1. Golpe na direção do mouse, 1 tile, arco 90° | tests/combat.test.ts (acerta a 1 tile, 1,5 tile, atrás, 40/50 graus, aim para baixo) | ok |
+| 2. 2 de dano, intervalo 0,4 s | tests/combat.test.ts > "cooldown: 23 ticks um golpe, 24 ticks dois" | ok |
+| 3. Alvo de treino com vida em src/data, removido em 0 | tests/combat.test.ts > "tres golpes removem o alvo" | ok |
+| 4. Vida 10, 1 s invulnerável | tests/combat.test.ts > "dano, invulnerabilidade de 60 ticks..." | ok |
+| 5. Desmaio, vida nunca negativa | tests/combat.test.ts > "vida nunca negativa, desmaia e nao golpeia" | ok |
+| 6. Valores em src/data | tests/combat.test.ts > "valores vem de src/data"; tests/hitFeedback.test.ts > "dados de feedback" | ok |
+| 7. Alvo pisca (cor diferente) e mostra "2" | tests/qa/card-008-feedback.test.ts > "144 Hz, clique em qualquer quadro..." e "piscar e numero expiram"; tests/hitFeedback.test.ts > "acerto: pisca, mostra '2'..." | ok |
+| 7. Golpe fatal ainda mostra o número | tests/qa/card-008-feedback.test.ts > "vida mostrada 6 -> 4 -> 2 e golpe fatal..." | ok |
+| 8. Vida do alvo sempre visível e atualizada (6/6 -> 4/6 -> 2/6) | tests/qa/card-008-feedback.test.ts > "vida mostrada 6 -> 4 -> 2..."; tests/hitFeedback.test.ts > "dois acertos" | ok |
+| 9. Erro sem piscar, sem número, vida igual, arco continua | tests/qa/card-008-feedback.test.ts > "erro (fora do alcance e fora do arco)..." (lastSwing gravado, lastHit null); tests/hitFeedback.test.ts > "erro: nada de novo..." | ok |
+| 10. Sem outras armas/criaturas/contato | revisão do diff | ok |
+
+Limite: o desenho real (Phaser: cor do piscar, Text do número, barra) não roda em teste; GameScene.drawCombat foi lido e só desenha o resultado de hitFeedbackView. Confirmar no playtest.
+
+Roteiro de playtest (o servidor de dev já roda no worktree; RECARREGUE a página com Ctrl+F5 antes de jogar):
+1. Abra o jogo e recarregue. Deve aparecer o alvo vermelho 3 tiles à direita do Enzo, com barra de vida verde e o texto "6/6" acima dele, e "Vida 10/10" no canto.
+2. Chegue a ~1 tile do alvo e clique esquerdo mirando nele: o alvo deve piscar em amarelo por um instante e um número "2" deve subir acima dele; a barra/texto passa para "4/6". Clique de novo (espere ~0,4 s): "2/6".
+3. No 3º golpe o alvo some, mas o número "2" ainda deve aparecer onde ele estava; barra e texto somem junto com o alvo.
+4. Erre de propósito (fique a mais de 1 tile, ou mire para o lado oposto): o arco aparece, mas o alvo não pisca, nenhum número surge e a vida mostrada não muda.
+5. Faça spam de cliques: só golpeia a cada ~0,4 s. Tecla K: vida do Enzo cai 3 e ele pisca 1 s; até zerar mostra "DESMAIOU".
+
 ## Historico
 - 2026-10-22 15:58 | SM | criado no backlog (Fase 2)
 - 2026-10-22 15:59 | SM | PO aprovou; card fica no backlog: fase 2 > fase atual 1 (aguarda Guilherme atualizar docs/fases-do-projeto.md)
@@ -181,3 +206,4 @@ Roteiro de playtest (o servidor de dev já roda no worktree; RECARREGUE a págin
 - 2026-10-29 17:40 | SM | PO acrescentou 3 critérios de feedback de acerto; arquiteto acrescentou as tarefas (passo 7). Card segue em dev, retrabalho 3, resultado pendente; aciona o dev.
 - 2026-10-29 17:55 | SM | dev -> review (feedback de acerto); resultado pendente.
 - 2026-10-29 18:02 | SM | review -> qa (feedback de acerto); resultado pendente.
+- 2026-10-29 18:12 | SM | qa -> playtest (feedback de acerto, playtest: sim); resultado pendente, aguarda o Guilherme.
