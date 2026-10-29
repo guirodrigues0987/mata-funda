@@ -7,7 +7,7 @@ import { FREE_MAP } from "./freeMap";
 import { readCommand } from "../src/render/readCommand";
 
 const PX = PLAYER.speedTilesPerSecond * WORLD.tilePx;
-const none = { left: false, right: false, up: false, down: false, toggleLight: false };
+const none = { left: false, right: false, up: false, down: false, toggleLight: false, dodge: false };
 
 function walk(cmd: Command, n = 60) {
   const s0 = createInitialState(FREE_MAP);

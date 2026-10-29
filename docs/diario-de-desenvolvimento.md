@@ -52,3 +52,10 @@ Quem fez: PO → Arquiteto → Dev (Claude) → Revisor → QA → Playtest (Gui
 Retrabalhos: 0
 O que mudou no jogo: a lanterna do celular agora gasta bateria (150 s de 100% a 0%), liga e desliga com a tecla L, e um indicador no canto da tela mostra a carga.
 Curiosidade: o Arquiteto guardou a carga em ticks inteiros (9000) em vez de decimais, assim 150 s fecham exatamente, sem erro de arredondamento. Ele também elevou o card para playtest, e o Guilherme aprovou no terminal.
+
+
+### 2026-10-29 — Card 007: Esquiva com invulnerabilidade
+Quem fez: PO → Arquiteto → Dev (Claude) → Revisor → QA → Playtest (Guilherme)
+Retrabalhos: 0
+O que mudou no jogo: o Enzo ganhou a esquiva: com Espaço ele rola 3 tiles em 0,25 s, sem levar dano durante o rolamento, e precisa esperar 0,8 s para rolar de novo.
+Curiosidade: a bíblia não dizia o que fazer com Espaço parado nem de quando contar os 0,8 s. O Arquiteto decidiu: parado não faz nada, e a recarga conta do início do rolamento. Como ainda não há inimigos, um alvo de teste que causa dano provou a invulnerabilidade, e o card passou por todo o quadro sem retrabalho.
