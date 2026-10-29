@@ -4,3 +4,4 @@ export * from "./step";
 export * from "./clock";
 export * from "./movement";
 export * from "./light";
+export * from "./collision";

@@ -38,3 +38,10 @@ Quem fez: PO → Arquiteto (bloqueou uma vez, depois aprovou) → Dev (Claude) �
 Retrabalhos: 0
 O que mudou no jogo: a tela ficou na escuridão e só um círculo de 4 tiles em volta do Enzo, a lanterna do celular, revela o que está por perto, usando as luzes 2D do Phaser.
 Curiosidade: o Arquiteto avisou que a luz do Phaser só afeta imagens, não desenhos simples, então as formas de teste viraram texturas geradas por código, e o Enzo continua sem luz, sempre visível. Ponto de honestidade: ninguém viu o efeito rodando no navegador (o ambiente não tem tela). Raio, posição e lógica foram checados por 31 testes e pelo build, mas a intensidade 2 e a borda suave da luz ainda precisam do olho do Guilherme.
+
+
+### 2026-10-29 — Card 005: Câmera e mapa com colisão
+Quem fez: PO → Arquiteto → Dev (Claude) → Revisor → QA → Playtest (Guilherme)
+Retrabalhos: 0
+O que mudou no jogo: a câmera passou a seguir o Enzo por um mapa fixo de 40x24 tiles, com corredor, sala e obstáculos que ele não atravessa, e a luz do card 003 continua acompanhando.
+Curiosidade: o PO marcou o card sem playtest, mas o Arquiteto pediu playtest por mexer em movimento, e o card passou por todo o quadro sem nenhum retrabalho. A colisão ficou na simulação pura, sem Phaser, e o QA testou todos os tiles livres do mapa nas 8 direções. O card esperou uns dias pelo playtest, aprovado pelo Guilherme via Telegram.

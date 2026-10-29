@@ -10,6 +10,7 @@ Tudo que muda no jogo, escrito pelo agente Redator a cada card concluído.
 - O jogo agora roda a 60 atualizações por segundo, sempre no mesmo ritmo, não importa se a tela está lenta ou rápida. Um marcador de teste na cena se move com as setas ou WASD para mostrar isso funcionando. (card 001)
 - O Enzo agora aparece como uma cápsula escura com um boné laranja e anda em 8 direções com W, A, S e D, a 5 tiles por segundo. Andar na diagonal não é mais rápido que andar reto. (card 002)
 - A mata agora é escura: só um círculo de luz de 4 tiles em volta do Enzo, como a lanterna do celular, deixa ver o que está por perto, e a luz acompanha o Enzo enquanto ele anda. Há formas de teste espalhadas que só aparecem quando entram na luz. A luz é fixa e sempre ligada, e o efeito visual ainda não foi visto no navegador. (card 003)
+- A câmera agora acompanha o Enzo, que fica sempre no centro da tela, por um mapa de teste maior que a tela, com corredor, sala, paredes e obstáculos soltos. Paredes e obstáculos aparecem como formas escuras e o Enzo não consegue atravessá-los; na diagonal, ele desliza pela parede. A luz em volta dele continua acompanhando. (card 005)
 
 ### Alterado
 - As setas do teclado não movem mais o Enzo; o movimento é só com WASD. (card 002)

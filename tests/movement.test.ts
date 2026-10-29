@@ -3,14 +3,15 @@ import { createInitialState, run } from "../src/sim";
 import type { Command } from "../src/sim";
 import { PLAYER } from "../src/data/player";
 import { WORLD } from "../src/data/world";
+import { FREE_MAP } from "./freeMap";
 import { readCommand } from "../src/render/readCommand";
 
 const PX = PLAYER.speedTilesPerSecond * WORLD.tilePx;
 const none = { left: false, right: false, up: false, down: false };
 
 function walk(cmd: Command, n = 60) {
-  const s0 = createInitialState();
-  const s = run(s0, Array.from({ length: n }, () => cmd));
+  const s0 = createInitialState(FREE_MAP);
+  const s = run(s0, Array.from({ length: n }, () => cmd), FREE_MAP);
   return { dx: s.player.x - s0.player.x, dy: s.player.y - s0.player.y };
 }
 
